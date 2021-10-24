@@ -10,4 +10,10 @@ module com.weather {
     opens com.weather.controller to javafx.fxml;
     exports com.weather.controller;
 
+    opens com.weather.view to javafx.fxml;
+    exports com.weather.view;
+
+    opens com.weather.model to javafx.fxml;
+    exports com.weather.model;
+
 }
