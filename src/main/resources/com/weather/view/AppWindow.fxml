@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="809.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" layoutX="57.0" layoutY="42.0" prefHeight="25.0" prefWidth="407.0" text="SPRAWDŹ POGODĘ NA NAJBLIŻSZE 5 DNI" />
+      <Label layoutX="14.0" layoutY="143.0" prefHeight="17.0" prefWidth="54.0" text="Kraj:" />
+      <TextField fx:id="country1" layoutX="74.0" layoutY="139.0" />
+      <Label layoutX="14.0" layoutY="187.0" prefHeight="17.0" prefWidth="54.0" text="Miasto:" />
+      <TextField fx:id="city1" layoutX="74.0" layoutY="183.0" />
+      <Label layoutX="287.0" layoutY="143.0" prefHeight="17.0" prefWidth="54.0" text="Kraj:" />
+      <TextField fx:id="country2" layoutX="344.0" layoutY="139.0" />
+      <Label layoutX="287.0" layoutY="187.0" prefHeight="17.0" prefWidth="54.0" text="Miasto:" />
+      <TextField fx:id="city2" layoutX="344.0" layoutY="183.0" />
+      <Button layoutX="208.0" layoutY="246.0" mnemonicParsing="false" onAction="#buttonAction" text="Sprawdź pogodę" />
+      <Label alignment="CENTER" layoutX="58.0" layoutY="67.0" prefHeight="25.0" prefWidth="407.0" text="DLA DWÓCH DOWOLNYCH MIAST NA ŚWIECIE" />
+      <TableView layoutX="14.0" layoutY="294.0" prefHeight="501.0" prefWidth="240.0">
+        <columns>
+          <TableColumn prefWidth="76.0" text="C1" />
+          <TableColumn prefWidth="163.0" text="C2" />
+        </columns>
+      </TableView>
+      <TableView layoutX="262.0" layoutY="294.0" prefHeight="501.0" prefWidth="240.0">
+         <columns>
+            <TableColumn prefWidth="76.0" text="C1" />
+            <TableColumn prefWidth="163.0" text="C2" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
