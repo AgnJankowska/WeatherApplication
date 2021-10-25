@@ -1,29 +1,37 @@
 package com.weather;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class JSONReader {
 
     public static void fileReader() {
 
-        System.out.println(System.getProperty("user.dir"));
-
-        File file = new File("src/main/resources/com/weather/cities.txt");
-        System.out.println(file.getAbsolutePath());
-
+        String url = "src/main/resources/com/weather/model/cities.json";
         try {
-            FileReader fileReader = new FileReader(file);
-            System.out.println("tak");
-        } catch (FileNotFoundException e) {
+            String contents = new String((Files.readAllBytes(Paths.get(url))));
+            JSONArray allContent = new JSONArray(contents);
+            String city;
+
+            for (int i = 0; i < allContent.length(); i++) {
+                city = (String)allContent.getJSONObject(i).get("name");
+
+                if(city.equals("Benjin")) {
+                    System.out.println(city);
+                }
+            }
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 }
