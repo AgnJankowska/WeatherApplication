@@ -3,6 +3,7 @@ module com.weather {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires json.simple;
 
     opens com.weather to javafx.fxml;
     exports com.weather;
