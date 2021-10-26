@@ -33,6 +33,7 @@
             <TableColumn prefWidth="163.0" text="C2" />
          </columns>
       </TableView>
-      <ComboBox fx:id="comboBox" layoutX="173.0" layoutY="14.0" prefWidth="150.0" />
+      <ComboBox fx:id="comboBoxCountries1" editable="true" layoutX="14.0" layoutY="221.0" prefWidth="150.0" />
+      <ComboBox fx:id="comboBoxCities1" editable="true" layoutX="14.0" layoutY="259.0" prefWidth="150.0" visible="false" />
    </children>
 </AnchorPane>

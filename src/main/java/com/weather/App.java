@@ -11,7 +11,7 @@ public class App extends Application {
         ViewFactory viewFactory = new ViewFactory();
         viewFactory.showAppWindow();
 
-        JSONReader.fileReader();
+
     }
 
     public static void main(String[] args) {
