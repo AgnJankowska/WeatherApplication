@@ -1,8 +1,10 @@
 package com.weather.controller;
 
-import com.weather.JSONReader;
+import com.weather.model.JSONReader;
 import com.weather.model.AutoCompleteComboBoxListener;
 import com.weather.view.ViewFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -10,13 +12,14 @@ import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class AppWindowController implements Initializable {
 
     protected ViewFactory viewFactory;
     private String fxmlName;
-    private  JSONReader jsonReader;
+    private JSONReader jsonReader;
     private ArrayList<String> cities;
     private ArrayList<String> countries;
 
@@ -57,17 +60,16 @@ public class AppWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        new AutoCompleteComboBoxListener<>(comboBoxCountries1);
-        new AutoCompleteComboBoxListener<>(comboBoxCities1);
-
         addCountries();
         comboBoxCountries1.setOnAction(e -> addCities());
+
+        new AutoCompleteComboBoxListener<>(comboBoxCountries1);
+        new AutoCompleteComboBoxListener<>(comboBoxCities1);
     }
 
     private void addCountries() {
-        for(int i =0; i < countries.size(); i++) {
-            comboBoxCountries1.getItems().add(countries.get(i));
-        }
+        ObservableList<String> observableListCountries = FXCollections.observableList(countries);
+        comboBoxCountries1.setItems(observableListCountries);
     }
 
     private void addCities() {
@@ -76,11 +78,9 @@ public class AppWindowController implements Initializable {
 
         String selectedCountry = comboBoxCountries1.getSelectionModel().selectedItemProperty().getValue();
         cities = jsonReader.getCitiesOfSelectedCountry(selectedCountry);
+        Collections.sort(cities);
 
-        for(int i =0; i < cities.size(); i++) {
-            comboBoxCities1.getItems().add(cities.get(i));
-        }
+        ObservableList<String> observableListCities = FXCollections.observableList(cities);
+        comboBoxCities1.setItems(observableListCities);
     }
-
-
 }

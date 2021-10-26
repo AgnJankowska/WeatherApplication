@@ -10,8 +10,6 @@ public class App extends Application {
     public void start(Stage stage) {
         ViewFactory viewFactory = new ViewFactory();
         viewFactory.showAppWindow();
-
-
     }
 
     public static void main(String[] args) {
