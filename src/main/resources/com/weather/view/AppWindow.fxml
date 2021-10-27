@@ -1,37 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="809.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="837.0" prefWidth="528.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label alignment="CENTER" layoutX="57.0" layoutY="42.0" prefHeight="25.0" prefWidth="407.0" text="SPRAWDŹ POGODĘ NA NAJBLIŻSZE 5 DNI" />
-      <Label layoutX="14.0" layoutY="143.0" prefHeight="17.0" prefWidth="54.0" text="Kraj:" />
-      <TextField fx:id="country1" layoutX="74.0" layoutY="139.0" />
-      <Label layoutX="14.0" layoutY="187.0" prefHeight="17.0" prefWidth="54.0" text="Miasto:" />
-      <TextField fx:id="city1" layoutX="74.0" layoutY="183.0" />
-      <Label layoutX="287.0" layoutY="143.0" prefHeight="17.0" prefWidth="54.0" text="Kraj:" />
-      <TextField fx:id="country2" layoutX="344.0" layoutY="139.0" />
-      <Label layoutX="287.0" layoutY="187.0" prefHeight="17.0" prefWidth="54.0" text="Miasto:" />
-      <TextField fx:id="city2" layoutX="344.0" layoutY="183.0" />
-      <Button layoutX="208.0" layoutY="246.0" mnemonicParsing="false" onAction="#buttonAction" text="Sprawdź pogodę" />
-      <Label alignment="CENTER" layoutX="58.0" layoutY="67.0" prefHeight="25.0" prefWidth="407.0" text="DLA DWÓCH DOWOLNYCH MIAST NA ŚWIECIE" />
-      <TableView layoutX="14.0" layoutY="294.0" prefHeight="501.0" prefWidth="240.0">
-        <columns>
-          <TableColumn prefWidth="76.0" text="C1" />
-          <TableColumn prefWidth="163.0" text="C2" />
-        </columns>
-      </TableView>
-      <TableView layoutX="262.0" layoutY="294.0" prefHeight="501.0" prefWidth="240.0">
-         <columns>
-            <TableColumn prefWidth="76.0" text="C1" />
-            <TableColumn prefWidth="163.0" text="C2" />
-         </columns>
-      </TableView>
+      <Label alignment="CENTER" layoutX="58.0" layoutY="32.0" prefHeight="25.0" prefWidth="407.0" text="SPRAWDŹ POGODĘ NA NAJBLIŻSZE 5 DNI">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font></Label>
+      <Button layoutX="101.0" layoutY="252.0" mnemonicParsing="false" onAction="#buttonAction1" text="Sprawdź pogodę">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Label alignment="CENTER" layoutX="58.0" layoutY="67.0" prefHeight="25.0" prefWidth="407.0" text="DLA DWÓCH DOWOLNYCH MIAST NA ŚWIECIE">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font></Label>
+      <ComboBox fx:id="comboBoxCountries1" editable="true" layoutX="101.0" layoutY="139.0" prefWidth="150.0" promptText="KRAJ" />
+      <ComboBox fx:id="comboBoxCities1" editable="true" layoutX="101.0" layoutY="192.0" prefWidth="150.0" promptText="MIASTO" visible="false" />
+      <ComboBox fx:id="comboBoxCountries2" editable="true" layoutX="343.0" layoutY="139.0" prefWidth="150.0" promptText="KRAJ" />
+      <ComboBox fx:id="comboBoxCities2" editable="true" layoutX="343.0" layoutY="192.0" prefWidth="150.0" promptText="MIASTO" visible="false" />
+      <GridPane layoutX="7.0" layoutY="299.0" prefHeight="546.0" prefWidth="521.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="86.0" minWidth="10.0" prefWidth="59.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="112.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.0" minWidth="10.0" prefWidth="113.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.0" minWidth="10.0" prefWidth="124.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.0" minWidth="10.0" prefWidth="121.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="date1" prefHeight="17.0" prefWidth="39.0" text="xx.xx">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="date2" prefHeight="17.0" prefWidth="39.0" text="xx.xx" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="date3" prefHeight="17.0" prefWidth="39.0" text="xx.xx" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="date4" prefHeight="17.0" prefWidth="39.0" text="xx.xx" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="date5" prefHeight="17.0" prefWidth="39.0" text="xx.xx" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../../../../../../../../../../Downloads/pngegg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../../../../../../../../../../Downloads/pngegg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../../../../../../../../../../Downloads/pngegg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@../../../../../../../../../../Downloads/pngegg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="126.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@../../../../../../../../../../Downloads/pngegg.png" />
+               </image>
+            </ImageView>
+            <Label text="35st" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@../../../../../../../../../../Downloads/pngegg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../../../../../../../../../../Downloads/pngegg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../../../../../../../../../../Downloads/pngegg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../../../../../../../../../../Downloads/pngegg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@../../../../../../../../../../Downloads/pngegg.png" />
+               </image>
+            </ImageView>
+            <Label text="35st" GridPane.columnIndex="2">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="35st" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="35st" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="35st" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="35st" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="35st" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="35st" GridPane.columnIndex="4" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="35st" GridPane.columnIndex="4" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="35st" GridPane.columnIndex="4" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <Line endX="158.5" endY="735.0" layoutX="132.0" layoutY="110.0" opacity="0.75" startX="158.5" startY="4.5" stroke="#777d80" strokeWidth="0.5" />
+      <Button layoutX="343.0" layoutY="252.0" mnemonicParsing="false" onAction="#buttonAction2" text="Sprawdź pogodę">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Line endX="385.0" endY="-17.0" layoutX="146.0" layoutY="131.0" opacity="0.75" startX="-146.0" startY="-17.0" stroke="#777d80" strokeWidth="0.5" />
    </children>
 </AnchorPane>
