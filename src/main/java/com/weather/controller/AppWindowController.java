@@ -1,5 +1,6 @@
 package com.weather.controller;
 
+import com.weather.model.DateHandler;
 import com.weather.model.JSONReader;
 import com.weather.model.AutoCompleteComboBoxListener;
 import com.weather.view.ViewFactory;
@@ -8,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -41,49 +43,75 @@ public class AppWindowController implements Initializable {
     private ComboBox<String> comboBoxCities1;
 
     @FXML
-    private TextField country1;
+    private ComboBox<String> comboBoxCountries2;
 
     @FXML
-    private TextField city1;
+    private ComboBox<String> comboBoxCities2;
 
     @FXML
-    private TextField country2;
+    private Label date1;
 
     @FXML
-    private TextField city2;
+    private Label date2;
 
     @FXML
-    void buttonAction() {
+    private Label date3;
+
+    @FXML
+    private Label date4;
+
+    @FXML
+    private Label date5;
+
+    @FXML
+    void buttonAction1() {
+
+    }
+
+    @FXML
+    void buttonAction2() {
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        addCountries();
-        comboBoxCountries1.setOnAction(e -> addCities());
+        addCountries(comboBoxCountries1);
+        addCountries(comboBoxCountries2);
+        comboBoxCountries1.setOnAction(e -> addCities(comboBoxCities1, comboBoxCountries1));
+        comboBoxCountries2.setOnAction(e -> addCities(comboBoxCities2, comboBoxCountries2));
+        setCurrentDate();
     }
 
-    private void addCountries() {
+    private void addCountries(ComboBox<String> comboBoxCountries) {
         ObservableList<String> observableListCountries = FXCollections.observableList(countries);
-        comboBoxCountries1.setItems(observableListCountries);
+        comboBoxCountries.setItems(observableListCountries);
 
         //autocomplete elements of the list after typing
-        new AutoCompleteComboBoxListener<>(comboBoxCountries1);
+        new AutoCompleteComboBoxListener<>(comboBoxCountries);
     }
 
-    private void addCities() {
-        comboBoxCities1.setVisible(true);
-        comboBoxCities1.getItems().clear();
+    private void addCities(ComboBox<String> comboBoxCities, ComboBox<String> comboBoxCountries) {
+        comboBoxCities.setVisible(true);
+        comboBoxCities.getItems().clear();
 
-        String selectedCountry = comboBoxCountries1.getSelectionModel().selectedItemProperty().getValue();
+        String selectedCountry = comboBoxCountries.getSelectionModel().selectedItemProperty().getValue();
         cities = jsonReader.getCitiesOfSelectedCountry(selectedCountry);
         Collections.sort(cities);
 
         ObservableList<String> observableListCities = FXCollections.observableList(cities);
-        comboBoxCities1.setItems(observableListCities);
+        comboBoxCities.setItems(observableListCities);
 
         //autocomplete elements of the list after typing
-        new AutoCompleteComboBoxListener<>(comboBoxCities1);
+        new AutoCompleteComboBoxListener<>(comboBoxCities);
+    }
+
+    private void setCurrentDate() {
+        DateHandler dateHandler = new DateHandler();
+
+        date1.setText(dateHandler.getArrayOfFiveDays().get(0));
+        date2.setText(dateHandler.getArrayOfFiveDays().get(1));
+        date3.setText(dateHandler.getArrayOfFiveDays().get(2));
+        date4.setText(dateHandler.getArrayOfFiveDays().get(3));
+        date5.setText(dateHandler.getArrayOfFiveDays().get(4));
     }
 }
