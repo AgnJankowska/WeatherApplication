@@ -62,14 +62,14 @@ public class AppWindowController implements Initializable {
 
         addCountries();
         comboBoxCountries1.setOnAction(e -> addCities());
-
-        new AutoCompleteComboBoxListener<>(comboBoxCountries1);
-        new AutoCompleteComboBoxListener<>(comboBoxCities1);
     }
 
     private void addCountries() {
         ObservableList<String> observableListCountries = FXCollections.observableList(countries);
         comboBoxCountries1.setItems(observableListCountries);
+
+        //autocomplete elements of the list after typing
+        new AutoCompleteComboBoxListener<>(comboBoxCountries1);
     }
 
     private void addCities() {
@@ -82,5 +82,8 @@ public class AppWindowController implements Initializable {
 
         ObservableList<String> observableListCities = FXCollections.observableList(cities);
         comboBoxCities1.setItems(observableListCities);
+
+        //autocomplete elements of the list after typing
+        new AutoCompleteComboBoxListener<>(comboBoxCities1);
     }
 }
