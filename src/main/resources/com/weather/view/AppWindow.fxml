@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -18,10 +17,6 @@
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font></Label>
-      <Button layoutX="101.0" layoutY="252.0" mnemonicParsing="false" onAction="#buttonAction1" text="Sprawdź pogodę">
-         <font>
-            <Font size="14.0" />
-         </font></Button>
       <Label alignment="CENTER" layoutX="58.0" layoutY="67.0" prefHeight="25.0" prefWidth="407.0" text="DLA DWÓCH DOWOLNYCH MIAST NA ŚWIECIE">
          <font>
             <Font name="System Bold Italic" size="18.0" />
@@ -174,11 +169,6 @@
          </children>
       </GridPane>
       <Line endX="158.5" endY="735.0" layoutX="132.0" layoutY="110.0" opacity="0.75" startX="158.5" startY="4.5" stroke="#777d80" strokeWidth="0.5" />
-      <Button layoutX="343.0" layoutY="252.0" mnemonicParsing="false" onAction="#buttonAction2" text="Sprawdź pogodę">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
       <Line endX="385.0" endY="-17.0" layoutX="146.0" layoutY="131.0" opacity="0.75" startX="-146.0" startY="-17.0" stroke="#777d80" strokeWidth="0.5" />
    </children>
 </AnchorPane>

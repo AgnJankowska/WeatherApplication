@@ -1,4 +1,4 @@
-package com.weather.model;
+package com.weather.model.auxiliaryClasses;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

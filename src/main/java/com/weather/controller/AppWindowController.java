@@ -1,8 +1,7 @@
 package com.weather.controller;
 
-import com.weather.model.DateHandler;
-import com.weather.model.JSONReader;
-import com.weather.model.AutoCompleteComboBoxListener;
+import com.weather.model.*;
+import com.weather.model.auxiliaryClasses.AutoCompleteComboBoxListener;
 import com.weather.view.ViewFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,8 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,15 +20,18 @@ public class AppWindowController implements Initializable {
 
     protected ViewFactory viewFactory;
     private String fxmlName;
-    private JSONReader jsonReader;
-    private ArrayList<String> cities;
+    private JSONReaderLocation jsonReader;
+    private ArrayList<String> citiesName;
+    private ArrayList<City> cities;
     private ArrayList<String> countries;
 
     public AppWindowController(ViewFactory viewFactory, String fxmlName) {
         this.viewFactory = viewFactory;
         this.fxmlName = fxmlName;
-        this.jsonReader = new JSONReader();
+        this.jsonReader = new JSONReaderLocation();
         this.countries = jsonReader.getCountriesArray();
+        this.cities = new ArrayList<City>();
+        this.citiesName = new ArrayList<String>();
     }
 
     public String getFxmlName() {
@@ -63,30 +65,21 @@ public class AppWindowController implements Initializable {
     @FXML
     private Label date5;
 
-    @FXML
-    void buttonAction1() {
-
-    }
-
-    @FXML
-    void buttonAction2() {
-
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         addCountries(comboBoxCountries1);
         addCountries(comboBoxCountries2);
+        setDate();
         comboBoxCountries1.setOnAction(e -> addCities(comboBoxCities1, comboBoxCountries1));
         comboBoxCountries2.setOnAction(e -> addCities(comboBoxCities2, comboBoxCountries2));
-        setCurrentDate();
+        comboBoxCities1.setOnAction(e -> showWeather(comboBoxCities1));
+        comboBoxCities2.setOnAction(e -> showWeather(comboBoxCities2));
     }
 
     private void addCountries(ComboBox<String> comboBoxCountries) {
         ObservableList<String> observableListCountries = FXCollections.observableList(countries);
         comboBoxCountries.setItems(observableListCountries);
 
-        //autocomplete elements of the list after typing
         new AutoCompleteComboBoxListener<>(comboBoxCountries);
     }
 
@@ -96,16 +89,49 @@ public class AppWindowController implements Initializable {
 
         String selectedCountry = comboBoxCountries.getSelectionModel().selectedItemProperty().getValue();
         cities = jsonReader.getCitiesOfSelectedCountry(selectedCountry);
-        Collections.sort(cities);
 
-        ObservableList<String> observableListCities = FXCollections.observableList(cities);
+        int i = 0;
+        while(i < cities.size()) {
+            citiesName.add(cities.get(i).getName());
+            i++;
+        }
+        Collections.sort(citiesName);
+
+        ObservableList<String> observableListCities = FXCollections.observableList(citiesName);
         comboBoxCities.setItems(observableListCities);
 
-        //autocomplete elements of the list after typing
         new AutoCompleteComboBoxListener<>(comboBoxCities);
     }
 
-    private void setCurrentDate() {
+    private City getCoordinate(ComboBox<String> comboBoxCities) throws IOException {
+        City city = new City();
+
+        int i=0;
+        while(i<cities.size()){
+            if(comboBoxCities.getSelectionModel().selectedItemProperty().getValue().equals(cities.get(i).getName())){
+                city.setName(cities.get(i).getName());
+                city.setId(cities.get(i).getId());
+                city.setLatitude(cities.get(i).getLatitude());
+                city.setLongitude(cities.get(i).getLongitude());
+            }
+            i++;
+        }
+        return city;
+    }
+
+    private void showWeather(ComboBox<String> comboBoxCities) {
+        City city = new City();
+
+        try {
+            city = getCoordinate(comboBoxCities);
+            WeatherForecastManager weatherForecastManager = new WeatherForecastManager(city.getLongitude(), city.getLatitude());
+            weatherForecastManager.getWeather();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setDate() {
         DateHandler dateHandler = new DateHandler();
 
         date1.setText(dateHandler.getArrayOfFiveDays().get(0));
