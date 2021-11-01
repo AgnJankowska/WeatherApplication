@@ -32,6 +32,7 @@ public class AppWindowController implements Initializable {
         this.countries = jsonReader.getCountriesArray();
         this.cities = new ArrayList<City>();
         this.citiesName = new ArrayList<String>();
+
     }
 
     public String getFxmlName() {
@@ -65,6 +66,36 @@ public class AppWindowController implements Initializable {
     @FXML
     private Label date5;
 
+    @FXML
+    private Label temp11;
+
+    @FXML
+    private Label temp12;
+
+    @FXML
+    private Label temp13;
+
+    @FXML
+    private Label temp14;
+
+    @FXML
+    private Label temp15;
+
+    @FXML
+    private Label temp21;
+
+    @FXML
+    private Label temp22;
+
+    @FXML
+    private Label temp23;
+
+    @FXML
+    private Label temp24;
+
+    @FXML
+    private Label temp25;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         addCountries(comboBoxCountries1);
@@ -84,8 +115,8 @@ public class AppWindowController implements Initializable {
     }
 
     private void addCities(ComboBox<String> comboBoxCities, ComboBox<String> comboBoxCountries) {
-        comboBoxCities.setVisible(true);
         comboBoxCities.getItems().clear();
+        comboBoxCities.setVisible(true);
 
         String selectedCountry = comboBoxCountries.getSelectionModel().selectedItemProperty().getValue();
         cities = jsonReader.getCitiesOfSelectedCountry(selectedCountry);
@@ -101,6 +132,30 @@ public class AppWindowController implements Initializable {
         comboBoxCities.setItems(observableListCities);
 
         new AutoCompleteComboBoxListener<>(comboBoxCities);
+    }
+
+    private void setDate() {
+        DateHandler dateHandler = new DateHandler();
+
+        date1.setText(dateHandler.getArrayOfFiveDays().get(0));
+        date2.setText(dateHandler.getArrayOfFiveDays().get(1));
+        date3.setText(dateHandler.getArrayOfFiveDays().get(2));
+        date4.setText(dateHandler.getArrayOfFiveDays().get(3));
+        date5.setText(dateHandler.getArrayOfFiveDays().get(4));
+    }
+
+    private void showWeather(ComboBox<String> comboBoxCities) {
+        City city;
+
+        try {
+            city = getCoordinate(comboBoxCities);
+            WeatherForecastManager weatherForecastManager = new WeatherForecastManager(city.getLongitude(), city.getLatitude());
+
+            setTemperature(weatherForecastManager, comboBoxCities);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private City getCoordinate(ComboBox<String> comboBoxCities) throws IOException {
@@ -119,25 +174,26 @@ public class AppWindowController implements Initializable {
         return city;
     }
 
-    private void showWeather(ComboBox<String> comboBoxCities) {
-        City city = new City();
+    private void setTemperature(WeatherForecastManager weatherForecastManager, ComboBox<String> comboBoxCities) {
 
-        try {
-            city = getCoordinate(comboBoxCities);
-            WeatherForecastManager weatherForecastManager = new WeatherForecastManager(city.getLongitude(), city.getLatitude());
-            weatherForecastManager.getWeather();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(comboBoxCities.getId().equals("comboBoxCities1")) {
+            temp11.setText(weatherForecastManager.getArrayOfTemperature().get(0) + '\u00B0' + "C");
+            temp12.setText(weatherForecastManager.getArrayOfTemperature().get(1) + '\u00B0' + "C");
+            temp13.setText(weatherForecastManager.getArrayOfTemperature().get(2) + '\u00B0' + "C");
+            temp14.setText(weatherForecastManager.getArrayOfTemperature().get(3) + '\u00B0' + "C");
+            temp15.setText(weatherForecastManager.getArrayOfTemperature().get(4) + '\u00B0' + "C");
+        }
+        else if(comboBoxCities.getId().equals("comboBoxCities2")) {
+            temp21.setText(weatherForecastManager.getArrayOfTemperature().get(0) + '\u00B0' + "C");
+            temp22.setText(weatherForecastManager.getArrayOfTemperature().get(1) + '\u00B0' + "C");
+            temp23.setText(weatherForecastManager.getArrayOfTemperature().get(2) + '\u00B0' + "C");
+            temp24.setText(weatherForecastManager.getArrayOfTemperature().get(3) + '\u00B0' + "C");
+            temp25.setText(weatherForecastManager.getArrayOfTemperature().get(4) + '\u00B0' + "C");
         }
     }
 
-    private void setDate() {
-        DateHandler dateHandler = new DateHandler();
+    private void setGraphic(WeatherForecastManager weatherForecastManager) {
 
-        date1.setText(dateHandler.getArrayOfFiveDays().get(0));
-        date2.setText(dateHandler.getArrayOfFiveDays().get(1));
-        date3.setText(dateHandler.getArrayOfFiveDays().get(2));
-        date4.setText(dateHandler.getArrayOfFiveDays().get(3));
-        date5.setText(dateHandler.getArrayOfFiveDays().get(4));
+
     }
 }

@@ -1,7 +1,7 @@
 package com.weather.model;
 
 import com.google.gson.Gson;
-import com.weather.model.forecastComponent.Weather;
+import com.weather.model.forecastComponent.RootWeather;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,7 +17,7 @@ public class JSONReaderWeather {
         this.createURLString = createURL.getUrl();
     }
 
-    public Weather createObjectFromJSON() throws IOException {
+    public RootWeather createObjectFromJSON() throws IOException {
         URL url = new URL(createURLString);
         Scanner content = new Scanner((InputStream) url.getContent());
         String result = "";
@@ -26,11 +26,11 @@ public class JSONReaderWeather {
             result += content.nextLine();
         }
 
-        Weather weatherObject = null;
+        RootWeather weatherObject = null;
         Gson gson = new Gson();
         String json = result;
 
-        weatherObject = gson.fromJson(json, Weather.class);
+        weatherObject = gson.fromJson(json, RootWeather.class);
         return weatherObject;
     }
 }

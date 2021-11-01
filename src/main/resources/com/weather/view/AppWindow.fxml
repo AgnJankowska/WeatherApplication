@@ -91,7 +91,7 @@
                   <Image url="@../../../../../../../../../../Downloads/pngegg.png" />
                </image>
             </ImageView>
-            <Label text="35st" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label fx:id="temp12" text="35st" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -121,47 +121,47 @@
                   <Image url="@../../../../../../../../../../Downloads/pngegg.png" />
                </image>
             </ImageView>
-            <Label text="35st" GridPane.columnIndex="2">
+            <Label fx:id="temp11" text="35st" GridPane.columnIndex="2">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label text="35st" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Label fx:id="temp13" text="35st" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label text="35st" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Label fx:id="temp14" text="35st" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label text="35st" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <Label fx:id="temp15" text="35st" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label text="35st" GridPane.columnIndex="4">
+            <Label fx:id="temp21" text="35st" GridPane.columnIndex="4">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label text="35st" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <Label fx:id="temp22" text="35st" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label text="35st" GridPane.columnIndex="4" GridPane.rowIndex="2">
+            <Label fx:id="temp23" text="35st" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label text="35st" GridPane.columnIndex="4" GridPane.rowIndex="3">
+            <Label fx:id="temp24" text="35st" GridPane.columnIndex="4" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label text="35st" GridPane.columnIndex="4" GridPane.rowIndex="4">
+            <Label fx:id="temp25" text="35st" GridPane.columnIndex="4" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

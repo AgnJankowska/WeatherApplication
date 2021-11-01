@@ -1,37 +1,42 @@
 package com.weather.model.forecastComponent;
 
-import com.weather.model.City;
-import com.fasterxml.jackson.annotation.*;
-
 public class Weather {
-    private String cod;
-    private long message;
-    private long cnt;
-    private ListOfComponents[] list;
-    private CityForecast city;
 
-    @JsonProperty("cod")
-    public String getCod() { return cod; }
-    @JsonProperty("cod")
-    public void setCod(String value) { this.cod = value; }
+    private String icon;
+    private int id;
+    private String main;
+    private String description;
 
-    @JsonProperty("message")
-    public long getMessage() { return message; }
-    @JsonProperty("message")
-    public void setMessage(long value) { this.message = value; }
+    public int getId() {
+        return id;
+    }
 
-    @JsonProperty("cnt")
-    public long getCnt() { return cnt; }
-    @JsonProperty("cnt")
-    public void setCnt(long value) { this.cnt = value; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    @JsonProperty("list")
-    public ListOfComponents[] getList() { return list; }
-    @JsonProperty("list")
-    public void setList(ListOfComponents[] value) { this.list = value; }
+    public String getMain() {
+        return main;
+    }
 
-    @JsonProperty("city")
-    public CityForecast getCity() { return city; }
-    @JsonProperty("city")
-    public void setCity(CityForecast value) { this.city = value; }
+    public void setMain(String main) {
+        this.main = main;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
 }

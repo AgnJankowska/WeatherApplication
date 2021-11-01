@@ -2,9 +2,10 @@ package com.weather.model;
 
 public class CreateURL {
 
-    private String apiForecast = "http://api.openweathermap.org/data/2.5/forecast?";
+    private String apiForecast = "https://api.openweathermap.org/data/2.5/onecall?";
     private String units = "&units=metric";
     private String apiKey = "&appid=2fdecf9a527ebefbfe75ed24657fecf0";
+    private String apiExclude = "&exclude=current,minutely,hourly";
     private String latitude = "";
     private String longitude = "";
 
@@ -24,7 +25,7 @@ public class CreateURL {
     public String getUrl() {
         latitude = "&lat="+createCoordinateAsString(latitudeDouble);
         longitude = "&lon="+createCoordinateAsString(longitudeDouble);
-        return apiForecast+latitude+longitude+units+apiKey;
+        return apiForecast+latitude+longitude+units+apiKey+apiExclude;
     }
 }
 

@@ -10,12 +10,6 @@ public class DateHandler {
 
     private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM");
 
-    private String getCurrentDate() {
-        Date date = new Date();
-        String currentDate = formatter.format(date);
-        return currentDate;
-    }
-
     public ArrayList<String> getArrayOfFiveDays() {
         ArrayList<String> arrayOfFiveDays = new ArrayList<String>() {
             {
@@ -37,5 +31,11 @@ public class DateHandler {
             i++;
         }
         return arrayOfFiveDays;
+    }
+
+    private String getCurrentDate() {
+        Date date = new Date();
+        String currentDate = formatter.format(date);
+        return currentDate;
     }
 }
