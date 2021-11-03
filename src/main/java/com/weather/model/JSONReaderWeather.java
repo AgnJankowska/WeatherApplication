@@ -19,6 +19,9 @@ public class JSONReaderWeather {
 
     public RootWeather createObjectFromJSON() throws IOException {
         URL url = new URL(createURLString);
+
+        System.out.println(url);
+
         Scanner content = new Scanner((InputStream) url.getContent());
         String result = "";
 

@@ -23,5 +23,7 @@ module com.weather {
 
     exports com.weather.model.forecastComponent;
     opens com.weather.model.forecastComponent to javafx.fxml;
+    exports com.weather.model.weatherCondition;
+    opens com.weather.model.weatherCondition to javafx.fxml;
 
 }
