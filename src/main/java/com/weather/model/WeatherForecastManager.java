@@ -10,12 +10,11 @@ public class WeatherForecastManager {
 
     private RootWeather weatherObject;
 
+    public WeatherForecastManager() {}
     public WeatherForecastManager(Double longitude, Double latitude) throws IOException {
         JSONReaderWeather jsonReaderWeather = new JSONReaderWeather(longitude, latitude);
         this.weatherObject = jsonReaderWeather.createObjectFromJSON();
     }
-
-    public WeatherForecastManager() {}
 
     public ArrayList<String> getArrayOfTemperature() {
         int maxTemperature;

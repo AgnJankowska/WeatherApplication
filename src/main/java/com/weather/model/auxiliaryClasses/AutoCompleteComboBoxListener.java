@@ -69,8 +69,8 @@ public class AutoCompleteComboBoxListener<T> implements EventHandler<KeyEvent> {
         }
         String t = comboBox.getEditor().getText();
 
-        comboBox.setItems(list);
         comboBox.setValue("");
+        comboBox.setItems(list);
 
         comboBox.getEditor().setText(t);
         if (!moveCaretToPos) {

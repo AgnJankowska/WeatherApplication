@@ -55,7 +55,33 @@ public class JSONReaderLocation {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //dodatkowy element reprezentujący cały kraj
+        cities.add(getFirstElementOfList(country));
+
         return cities;
+    }
+
+    private City getFirstElementOfList(String country) {
+
+        City representationOfWholeCountry = new City();
+        Integer countryId = getSelectedCountryId(country);
+
+        try {
+            String contents = new String((Files.readAllBytes(Paths.get(urlCounties))));
+            JSONArray allContent = new JSONArray(contents);
+            for (int i = 0; i < allContent.length(); i++) {
+                if((allContent.getJSONObject(i).get("id")).equals(countryId)){
+                    representationOfWholeCountry.setId((Integer) allContent.getJSONObject(i).get("id"));
+                    representationOfWholeCountry.setName("Cały kraj");
+                    representationOfWholeCountry.setLatitude(Double.parseDouble((String)allContent.getJSONObject(i).get("latitude")));
+                    representationOfWholeCountry.setLongitude(Double.parseDouble((String)allContent.getJSONObject(i).get("longitude")));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return representationOfWholeCountry;
     }
 
     private Integer getSelectedCountryId(String country){

@@ -29,6 +29,7 @@ public class ViewFactory {
         }
 
         Scene scene = new Scene(parent);
+        scene.getStylesheets().add(getClass().getResource("css/style.css").toExternalForm());
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();

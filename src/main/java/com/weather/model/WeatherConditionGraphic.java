@@ -43,9 +43,9 @@ public class WeatherConditionGraphic {
             image = mist;
         } else if (arrayOfConditions.get(i) == 800) {
             image = clearSky;
-        } else if (arrayOfConditions.get(i) == 801) {
+        } else if (arrayOfConditions.get(i) == 801 || arrayOfConditions.get(i) == 802) {
             image = fewClouds;
-        } else if (arrayOfConditions.get(i) == 802 || arrayOfConditions.get(i) == 803 ) {
+        } else if (arrayOfConditions.get(i) == 803) {
             image = scatteredClouds;
         } else if (arrayOfConditions.get(i) == 804) {
             image = brokenClouds;

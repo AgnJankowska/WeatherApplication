@@ -2,7 +2,6 @@ package com.weather.controller;
 
 import com.weather.model.*;
 import com.weather.model.auxiliaryClasses.AutoCompleteComboBoxListener;
-import com.weather.model.weatherCondition.DescriptionOfCondition;
 import com.weather.view.ViewFactory;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,10 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AppWindowController implements Initializable {
@@ -23,7 +20,6 @@ public class AppWindowController implements Initializable {
     private JSONReaderLocation jsonReader;
     private ObservableList<String> countries;
     private CitiesAndCountries citiesAndCountries;
-    private ObservableList<String> observableListCities;
 
     public AppWindowController(ViewFactory viewFactory, String fxmlName) {
         this.viewFactory = viewFactory;
@@ -130,30 +126,10 @@ public class AppWindowController implements Initializable {
         addCountries(comboBoxCountries2);
         setDate();
 
-        try {
-            setInitialGraphic();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         comboBoxCountries1.setOnAction(e -> addCities(comboBoxCities1, comboBoxCountries1));
         comboBoxCountries2.setOnAction(e -> addCities(comboBoxCities2, comboBoxCountries2));
         comboBoxCities1.setOnAction(e -> showWeather(comboBoxCities1));
         comboBoxCities2.setOnAction(e -> showWeather(comboBoxCities2));
-    }
-
-    private void setInitialGraphic() throws IOException {
-        WeatherForecastManager weatherForecastManager = new WeatherForecastManager();
-        graphic11.setImage(weatherForecastManager.getInitialGraphic());
-        graphic12.setImage(weatherForecastManager.getInitialGraphic());
-        graphic13.setImage(weatherForecastManager.getInitialGraphic());
-        graphic14.setImage(weatherForecastManager.getInitialGraphic());
-        graphic15.setImage(weatherForecastManager.getInitialGraphic());
-        graphic21.setImage(weatherForecastManager.getInitialGraphic());
-        graphic22.setImage(weatherForecastManager.getInitialGraphic());
-        graphic23.setImage(weatherForecastManager.getInitialGraphic());
-        graphic24.setImage(weatherForecastManager.getInitialGraphic());
-        graphic25.setImage(weatherForecastManager.getInitialGraphic());
     }
 
     private void addCountries(ComboBox<String> comboBoxCountries) {
@@ -162,12 +138,17 @@ public class AppWindowController implements Initializable {
     }
 
     private void addCities(ComboBox<String> comboBoxCities, ComboBox<String> comboBoxCountries) {
+        resetGraphicAndTemperature(comboBoxCities);
         comboBoxCities.setValue("");
         comboBoxCities.getItems().clear();
-        comboBoxCities.setVisible(true);
+        ObservableList<String> observableListCities;
 
         String selectedCountry = comboBoxCountries.getSelectionModel().selectedItemProperty().getValue();
         observableListCities = (comboBoxCities.getId().equals("comboBoxCities1")) ? citiesAndCountries.getObservableList1(selectedCountry) : citiesAndCountries.getObservableList2(selectedCountry);
+
+        if(!(observableListCities.get(0)==null))  {
+            comboBoxCities.setVisible(true);
+        }
 
         comboBoxCities.setItems(observableListCities);
         new AutoCompleteComboBoxListener<>(comboBoxCities);
@@ -233,6 +214,33 @@ public class AppWindowController implements Initializable {
             graphic23.setImage(weatherForecastManager.getGraphic(2));
             graphic24.setImage(weatherForecastManager.getGraphic(3));
             graphic25.setImage(weatherForecastManager.getGraphic(4));
+        }
+    }
+
+    private void resetGraphicAndTemperature(ComboBox<String> comboBoxCities) {
+        if(comboBoxCities.getId().equals("comboBoxCities1")) {
+            graphic11.setImage(null);
+            graphic12.setImage(null);
+            graphic13.setImage(null);
+            graphic14.setImage(null);
+            graphic15.setImage(null);
+            temp11.setText("");
+            temp12.setText("");
+            temp13.setText("");
+            temp14.setText("");
+            temp15.setText("");
+        }
+        else if(comboBoxCities.getId().equals("comboBoxCities2")) {
+            graphic21.setImage(null);
+            graphic22.setImage(null);
+            graphic23.setImage(null);
+            graphic24.setImage(null);
+            graphic25.setImage(null);
+            temp21.setText("");
+            temp22.setText("");
+            temp23.setText("");
+            temp24.setText("");
+            temp25.setText("");
         }
     }
 
