@@ -1,4 +1,4 @@
-package com.weather.model;
+package com.weather.model.auxiliaryClasses;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -69,7 +69,9 @@ public class AutoCompleteComboBoxListener<T> implements EventHandler<KeyEvent> {
         }
         String t = comboBox.getEditor().getText();
 
+        comboBox.setValue("");
         comboBox.setItems(list);
+
         comboBox.getEditor().setText(t);
         if (!moveCaretToPos) {
             caretPos = -1;

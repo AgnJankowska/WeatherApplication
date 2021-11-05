@@ -2,26 +2,21 @@ package com.weather.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class DateHandler {
 
-    private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM");
-
-    private String getCurrentDate() {
-        Date date = new Date();
-        String currentDate = formatter.format(date);
-        return currentDate;
-    }
+    private static SimpleDateFormat formatter = new SimpleDateFormat("E");
 
     public ArrayList<String> getArrayOfFiveDays() {
-        ArrayList<String> arrayOfFiveDays = new ArrayList<String>() {
-            {
-                add(getCurrentDate());
-            }
-        };
+
+        ArrayList<String> arrayOfFiveDays = new ArrayList<String>() {};
 
         Calendar calendar = Calendar.getInstance();
         try {
@@ -30,6 +25,9 @@ public class DateHandler {
             e.printStackTrace();
         }
 
+        calendar.add(Calendar.DATE, 0);
+        arrayOfFiveDays.add(formatter.format(calendar.getTime()));
+
         int i=0;
         while(i < 4){
             calendar.add(Calendar.DATE, 1);
@@ -37,5 +35,11 @@ public class DateHandler {
             i++;
         }
         return arrayOfFiveDays;
+    }
+
+    private static String getCurrentDate() {
+        Date date = new Date();
+        String currentDate = formatter.format(date);
+        return currentDate;
     }
 }

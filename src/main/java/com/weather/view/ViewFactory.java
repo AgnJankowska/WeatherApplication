@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -29,8 +30,13 @@ public class ViewFactory {
         }
 
         Scene scene = new Scene(parent);
+        scene.getStylesheets().add(getClass().getResource("css/style.css").toExternalForm());
         Stage stage = new Stage();
+
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
+
         stage.show();
     }
 
