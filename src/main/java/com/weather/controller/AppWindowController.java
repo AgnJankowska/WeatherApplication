@@ -2,6 +2,8 @@ package com.weather.controller;
 
 import com.weather.model.*;
 import com.weather.model.auxiliaryClasses.AutoCompleteComboBoxListener;
+import com.weather.model.service.CountriesObservableListService;
+import com.weather.model.service.GraphicService;
 import com.weather.view.ViewFactory;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,14 +20,12 @@ public class AppWindowController implements Initializable {
     protected ViewFactory viewFactory;
     private String fxmlName;
     private JSONReaderLocation jsonReader;
-    private ObservableList<String> countries;
     private CitiesAndCountries citiesAndCountries;
 
     public AppWindowController(ViewFactory viewFactory, String fxmlName) {
         this.viewFactory = viewFactory;
         this.fxmlName = fxmlName;
         this.jsonReader = new JSONReaderLocation();
-        this.countries = jsonReader.getCountriesArray();
         this.citiesAndCountries = new CitiesAndCountries();
     }
 
@@ -122,8 +122,14 @@ public class AppWindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        addCountries(comboBoxCountries1);
-        addCountries(comboBoxCountries2);
+
+        CountriesObservableListService countriesObservableListService = new CountriesObservableListService();
+        countriesObservableListService.start();
+        countriesObservableListService.setOnSucceeded(event -> {
+            addCountries(comboBoxCountries1, countriesObservableListService.getValue());
+            addCountries(comboBoxCountries2, countriesObservableListService.getValue());
+        });
+
         setDate();
 
         comboBoxCountries1.setOnAction(e -> addCities(comboBoxCities1, comboBoxCountries1));
@@ -132,8 +138,8 @@ public class AppWindowController implements Initializable {
         comboBoxCities2.setOnAction(e -> showWeather(comboBoxCities2));
     }
 
-    private void addCountries(ComboBox<String> comboBoxCountries) {
-        comboBoxCountries.setItems(countries);
+    private void addCountries(ComboBox<String> comboBoxCountries, ObservableList<String> countriesArray) {
+        comboBoxCountries.setItems(countriesArray);
         new AutoCompleteComboBoxListener<>(comboBoxCountries);
     }
 
@@ -201,20 +207,25 @@ public class AppWindowController implements Initializable {
 
     private void setTemperature(WeatherForecastManager weatherForecastManager, ComboBox<String> comboBoxCities) {
 
-        if(comboBoxCities.getId().equals("comboBoxCities1")) {
-            graphic11.setImage(weatherForecastManager.getGraphic(0));
-            graphic12.setImage(weatherForecastManager.getGraphic(1));
-            graphic13.setImage(weatherForecastManager.getGraphic(2));
-            graphic14.setImage(weatherForecastManager.getGraphic(3));
-            graphic15.setImage(weatherForecastManager.getGraphic(4));
-        }
-        else if(comboBoxCities.getId().equals("comboBoxCities2")) {
-            graphic21.setImage(weatherForecastManager.getGraphic(0));
-            graphic22.setImage(weatherForecastManager.getGraphic(1));
-            graphic23.setImage(weatherForecastManager.getGraphic(2));
-            graphic24.setImage(weatherForecastManager.getGraphic(3));
-            graphic25.setImage(weatherForecastManager.getGraphic(4));
-        }
+        GraphicService graphicService = new GraphicService(weatherForecastManager, 0);
+
+        graphicService.start();
+        graphicService.setOnSucceeded(e -> {
+            if(comboBoxCities.getId().equals("comboBoxCities1")) {
+                graphic11.setImage(graphicService.getValue().get(0));
+                graphic12.setImage(graphicService.getValue().get(1));
+                graphic13.setImage(graphicService.getValue().get(2));
+                graphic14.setImage(graphicService.getValue().get(3));
+                graphic15.setImage(graphicService.getValue().get(4));
+            }
+            else if(comboBoxCities.getId().equals("comboBoxCities2")) {
+                graphic21.setImage(graphicService.getValue().get(0));
+                graphic22.setImage(graphicService.getValue().get(1));
+                graphic23.setImage(graphicService.getValue().get(2));
+                graphic24.setImage(graphicService.getValue().get(3));
+                graphic25.setImage(graphicService.getValue().get(4));
+            }
+        });
     }
 
     private void resetGraphicAndTemperature(ComboBox<String> comboBoxCities) {

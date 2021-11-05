@@ -1,6 +1,7 @@
 package com.weather.model;
 
 import com.weather.model.auxiliaryClasses.StringFromList;
+import com.weather.model.service.CountriesObservableListService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.json.JSONArray;
@@ -12,26 +13,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JSONReaderLocation {
+public class JSONReaderLocation{
 
     private String urlCities = "src/main/resources/com/weather/model/cities.json";
     private String urlCounties = "src/main/resources/com/weather/model/countries.json";
-
-    public ObservableList<String> getCountriesArray() {
-
-        List<String> countriesList = new ArrayList<String>();
-        try {
-            String contents = new String((Files.readAllBytes(Paths.get(urlCounties))));
-            JSONArray allContent = new JSONArray(contents);
-            for (int i = 0; i < allContent.length(); i++) {
-                countriesList.add((String)allContent.getJSONObject(i).get("name"));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        ObservableList<String> countriesObservableList = FXCollections.observableList(countriesList);
-        return countriesObservableList;
-    }
 
     public ArrayList<City> getCitiesOfSelectedCountry(String country) {
         ArrayList<City> cities = new ArrayList<City>();

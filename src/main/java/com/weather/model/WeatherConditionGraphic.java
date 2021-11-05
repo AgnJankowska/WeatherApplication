@@ -6,21 +6,16 @@ import java.util.ArrayList;
 
 public class WeatherConditionGraphic {
 
-    private Image clearSky = new Image(getClass().getResourceAsStream("graphics/clear_sky.png"));
-    private Image brokenClouds = new Image(getClass().getResourceAsStream("graphics/broken_clouds.png"));
-    private Image fewClouds = new Image(getClass().getResourceAsStream("graphics/few_clouds.png"));
-    private Image mist = new Image(getClass().getResourceAsStream("graphics/mist.png"));
-    private Image rain = new Image(getClass().getResourceAsStream("graphics/rain.png"));
-    private Image scatteredClouds = new Image(getClass().getResourceAsStream("graphics/scattered_clouds.png"));
-    private Image showerRain = new Image(getClass().getResourceAsStream("graphics/shower_rain.png"));
-    private Image snow = new Image(getClass().getResourceAsStream("graphics/snow.png"));
-    private Image thunderstorm = new Image(getClass().getResourceAsStream("graphics/thunderstorm.png"));
-    private Image notSet = new Image(getClass().getResourceAsStream("graphics/not_set.png"));
-
-    public Image getInitialGraphic() {
-       Image image = notSet;
-       return image;
-    }
+    private Image clearSky = new Image(getClass().getResourceAsStream("service/graphics/clear_sky.png"));
+    private Image brokenClouds = new Image(getClass().getResourceAsStream("service/graphics/broken_clouds.png"));
+    private Image fewClouds = new Image(getClass().getResourceAsStream("service/graphics/few_clouds.png"));
+    private Image mist = new Image(getClass().getResourceAsStream("service/graphics/mist.png"));
+    private Image rain = new Image(getClass().getResourceAsStream("service/graphics/rain.png"));
+    private Image scatteredClouds = new Image(getClass().getResourceAsStream("service/graphics/scattered_clouds.png"));
+    private Image showerRain = new Image(getClass().getResourceAsStream("service/graphics/shower_rain.png"));
+    private Image snow = new Image(getClass().getResourceAsStream("service/graphics/snow.png"));
+    private Image thunderstorm = new Image(getClass().getResourceAsStream("service/graphics/thunderstorm.png"));
+    private Image notSet = new Image(getClass().getResourceAsStream("service/graphics/not_set.png"));
 
     public Image getConditionGraphic(ArrayList<Integer> arrayOfConditions, int i) {
 
@@ -52,7 +47,7 @@ public class WeatherConditionGraphic {
         } else {
             image = null;
         }
-        System.out.println(arrayOfConditions.get(i));
+
         return image;
     }
 }

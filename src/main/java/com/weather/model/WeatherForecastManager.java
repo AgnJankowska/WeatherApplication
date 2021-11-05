@@ -47,9 +47,4 @@ public class WeatherForecastManager {
         WeatherConditionGraphic weatherConditionGraphic = new WeatherConditionGraphic();
         return weatherConditionGraphic.getConditionGraphic(arrayOfConditions, position);
     }
-
-    public Image getInitialGraphic() {
-        WeatherConditionGraphic weatherConditionGraphic = new WeatherConditionGraphic();
-        return weatherConditionGraphic.getInitialGraphic();
-    }
 }

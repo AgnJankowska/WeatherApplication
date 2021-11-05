@@ -17,7 +17,7 @@
       <Line endX="159.5" endY="591.0" layoutX="142.0" layoutY="112.0" opacity="0.75" startX="159.5" startY="-44.0" stroke="#777d80" strokeWidth="0.5" />
       <ImageView fitHeight="804.0" fitWidth="541.0" layoutX="-1.0" layoutY="-95.0" opacity="0.58" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../model/graphics/background.png" />
+            <Image url="@../model/service/graphics/background.png" />
          </image>
       </ImageView>
       <HBox layoutX="-5.0" layoutY="-5.0" opacity="0.35" prefHeight="707.0" prefWidth="73.0" style="-fx-background-color: BLACK;" />
