@@ -7,14 +7,17 @@ import javafx.concurrent.Task;
 import org.json.JSONArray;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CountriesObservableListService extends Service<ObservableList<String>> {
 
-    private String urlCounties = "src/main/resources/com/weather/model/countries.json";
+    private URL url = this.getClass().getResource("countries.json");
 
     @Override
     protected Task<ObservableList<String>> createTask() {
@@ -29,8 +32,10 @@ public class CountriesObservableListService extends Service<ObservableList<Strin
 
     private List<String> createListOfCountries() {
         List<String> countriesList = new ArrayList<String>();
+
         try {
-            String contents = new String((Files.readAllBytes(Paths.get(urlCounties))));
+            InputStream in = url.openStream();
+            String contents = new String(in.readAllBytes());
             JSONArray allContent = new JSONArray(contents);
             for (int i = 0; i < allContent.length(); i++) {
                 countriesList.add((String) allContent.getJSONObject(i).get("name"));

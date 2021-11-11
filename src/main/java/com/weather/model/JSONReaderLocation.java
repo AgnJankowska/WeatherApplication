@@ -1,30 +1,32 @@
 package com.weather.model;
 
 import com.weather.model.auxiliaryClasses.StringFromList;
-import com.weather.model.service.CountriesObservableListService;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.json.JSONArray;
 
 import java.io.*;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class JSONReaderLocation{
 
-    private String urlCities = "src/main/resources/com/weather/model/cities.json";
-    private String urlCounties = "src/main/resources/com/weather/model/countries.json";
+    private URL urlCountries = this.getClass().getResource("countries.json");
+    private URL urlCities = this.getClass().getResource("cities.json");
 
     public ArrayList<City> getCitiesOfSelectedCountry(String country) {
         ArrayList<City> cities = new ArrayList<City>();
         Integer countryId = getSelectedCountryId(country);
 
         try {
-            List<String> listOfCities = Files.readAllLines(Paths.get(urlCities), StandardCharsets.UTF_8);
+            InputStream in = urlCities.openStream();
+            List<String> listOfCities = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
+
             JSONArray allContent = new JSONArray(StringFromList.getStringFromList(listOfCities));
+
             for (int i = 0; i < allContent.length(); i++) {
                 if((allContent.getJSONObject(i).get("country_id")).equals(countryId)) {
 
@@ -40,6 +42,7 @@ public class JSONReaderLocation{
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         //dodatkowy element reprezentujący cały kraj
         cities.add(getFirstElementOfList(country));
 
@@ -52,7 +55,8 @@ public class JSONReaderLocation{
         Integer countryId = getSelectedCountryId(country);
 
         try {
-            String contents = new String((Files.readAllBytes(Paths.get(urlCounties))));
+            InputStream in = urlCountries.openStream();
+            String contents = new String(in.readAllBytes());
             JSONArray allContent = new JSONArray(contents);
             for (int i = 0; i < allContent.length(); i++) {
                 if((allContent.getJSONObject(i).get("id")).equals(countryId)){
@@ -73,7 +77,8 @@ public class JSONReaderLocation{
 
         Integer countryId = 0;
         try {
-            String contents = new String((Files.readAllBytes(Paths.get(urlCounties))));
+            InputStream in = urlCountries.openStream();
+            String contents = new String(in.readAllBytes());
             JSONArray allContent = new JSONArray(contents);
             for (int i = 0; i < allContent.length(); i++) {
                 if((allContent.getJSONObject(i).get("name")).equals(country)) {

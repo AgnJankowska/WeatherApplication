@@ -188,7 +188,7 @@ public class AppWindowController implements Initializable {
         }
     }
 
-    private void setConditions(WeatherForecastManager weatherForecastManager, ComboBox<String> comboBoxCities) {
+    private void setTemperature(WeatherForecastManager weatherForecastManager, ComboBox<String> comboBoxCities) {
         if(comboBoxCities.getId().equals("comboBoxCities1")) {
             temp11.setText(weatherForecastManager.getArrayOfTemperature().get(0) + '\u00B0' + "C");
             temp12.setText(weatherForecastManager.getArrayOfTemperature().get(1) + '\u00B0' + "C");
@@ -205,9 +205,9 @@ public class AppWindowController implements Initializable {
         }
     }
 
-    private void setTemperature(WeatherForecastManager weatherForecastManager, ComboBox<String> comboBoxCities) {
+    private void setConditions(WeatherForecastManager weatherForecastManager, ComboBox<String> comboBoxCities) {
 
-        GraphicService graphicService = new GraphicService(weatherForecastManager, 0);
+        GraphicService graphicService = new GraphicService(weatherForecastManager);
 
         graphicService.start();
         graphicService.setOnSucceeded(e -> {

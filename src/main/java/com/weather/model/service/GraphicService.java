@@ -24,7 +24,7 @@ public class GraphicService extends Service<List<Image>> {
     private Image thunderstorm = new Image(getClass().getResourceAsStream("graphics/thunderstorm.png"));
     private Image notSet = new Image(getClass().getResourceAsStream("graphics/not_set.png"));
 
-    public GraphicService(WeatherForecastManager weatherForecastManager, int position) {
+    public GraphicService(WeatherForecastManager weatherForecastManager) {
         this.weatherForecastManager = weatherForecastManager;
     }
 
