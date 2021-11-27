@@ -1,6 +1,7 @@
 package com.weather.model;
 
 import com.google.gson.Gson;
+import com.weather.App;
 import com.weather.model.forecastComponent.RootWeather;
 
 import java.io.IOException;
@@ -19,19 +20,23 @@ public class JSONReaderWeather {
 
     public RootWeather createObjectFromJSON() throws IOException {
         URL url = new URL(createURLString);
-
-        Scanner content = new Scanner((InputStream) url.getContent());
-        String result = "";
-
-        while (content.hasNext()) {
-            result += content.nextLine();
-        }
-
         RootWeather weatherObject = null;
-        Gson gson = new Gson();
-        String json = result;
 
-        weatherObject = gson.fromJson(json, RootWeather.class);
+        try {
+            Scanner content = new Scanner((InputStream) url.getContent());
+            String result = "";
+
+            while (content.hasNext()) {
+                result += content.nextLine();
+            }
+            Gson gson = new Gson();
+            String json = result;
+
+            weatherObject = gson.fromJson(json, RootWeather.class);
+        }
+        catch (Exception e) {
+            App.showErrorMessage("Brak połączenia z siecią. Sprawdzenie pogody jest niemożliwe.");
+        }
         return weatherObject;
     }
 }

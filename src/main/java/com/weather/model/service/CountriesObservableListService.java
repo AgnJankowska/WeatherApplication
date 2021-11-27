@@ -1,5 +1,6 @@
 package com.weather.model.service;
 
+import com.weather.App;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
@@ -9,9 +10,6 @@ import org.json.JSONArray;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +39,7 @@ public class CountriesObservableListService extends Service<ObservableList<Strin
                 countriesList.add((String) allContent.getJSONObject(i).get("name"));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            App.showErrorMessage("Nie znaleziono wymaganego pliku źródłowego.");
         }
         return countriesList;
     }

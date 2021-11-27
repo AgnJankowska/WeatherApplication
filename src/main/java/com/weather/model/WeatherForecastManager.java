@@ -1,6 +1,8 @@
 package com.weather.model;
 
 import com.weather.model.forecastComponent.RootWeather;
+import com.weather.model.weatherCondition.DescriptionOfCondition;
+import com.weather.model.weatherCondition.SingleCondition;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
@@ -42,9 +44,29 @@ public class WeatherForecastManager {
         return arrayOfConditions;
     }
 
-    public Image getGraphic(int position) {
-        ArrayList<Integer> arrayOfConditions = getArrayOfConditions();
-        WeatherConditionGraphic weatherConditionGraphic = new WeatherConditionGraphic();
-        return weatherConditionGraphic.getConditionGraphic(arrayOfConditions, position);
+    public ArrayList<String> getArrayOfDescription() {
+        String description;
+        Integer condition;
+        ArrayList<String> arrayOfDescription =  new ArrayList<>(5);
+
+        DescriptionOfCondition descriptionOfCondition = new DescriptionOfCondition();
+        descriptionOfCondition.setArrayOfCondition();
+        ArrayList<SingleCondition> arraySingleCondition = descriptionOfCondition.getArrayOfCondition();
+
+        int i=0;
+        while(i < 5){
+            condition = weatherObject.getDaily().get(i).getWeather().get(0).getId();
+            for(int j=0; j<54; j++){
+                if(condition == arraySingleCondition.get(j).getId()){
+                    description = arraySingleCondition.get(j).getDescription();
+                    arrayOfDescription.add(description);
+                }
+            }
+            i++;
+        }
+        return arrayOfDescription;
+
+
     }
+
 }

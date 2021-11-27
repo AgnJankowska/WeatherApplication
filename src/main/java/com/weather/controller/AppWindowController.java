@@ -4,6 +4,7 @@ import com.weather.model.*;
 import com.weather.model.auxiliaryClasses.AutoCompleteComboBoxListener;
 import com.weather.model.service.CountriesObservableListService;
 import com.weather.model.service.GraphicService;
+import com.weather.model.weatherCondition.DescriptionOfCondition;
 import com.weather.view.ViewFactory;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -120,6 +121,36 @@ public class AppWindowController implements Initializable {
     @FXML
     private ImageView graphic25;
 
+    @FXML
+    private Label description11;
+
+    @FXML
+    private Label description12;
+
+    @FXML
+    private Label description13;
+
+    @FXML
+    private Label description14;
+
+    @FXML
+    private Label description15;
+
+    @FXML
+    private Label description21;
+
+    @FXML
+    private Label description22;
+
+    @FXML
+    private Label description23;
+
+    @FXML
+    private Label description24;
+
+    @FXML
+    private Label description25;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -181,10 +212,28 @@ public class AppWindowController implements Initializable {
 
                 setTemperature(weatherForecastManager, comboBoxCities);
                 setConditions(weatherForecastManager, comboBoxCities);
+                setDescription(weatherForecastManager, comboBoxCities);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void setDescription(WeatherForecastManager weatherForecastManager, ComboBox<String> comboBoxCities) {
+        if(comboBoxCities.getId().equals("comboBoxCities1")) {
+            description11.setText(weatherForecastManager.getArrayOfDescription().get(0));
+            description12.setText(weatherForecastManager.getArrayOfDescription().get(1));
+            description13.setText(weatherForecastManager.getArrayOfDescription().get(2));
+            description14.setText(weatherForecastManager.getArrayOfDescription().get(3));
+            description15.setText(weatherForecastManager.getArrayOfDescription().get(4));
+        }
+        else if(comboBoxCities.getId().equals("comboBoxCities2")) {
+            description21.setText(weatherForecastManager.getArrayOfDescription().get(0));
+            description22.setText(weatherForecastManager.getArrayOfDescription().get(1));
+            description23.setText(weatherForecastManager.getArrayOfDescription().get(2));
+            description24.setText(weatherForecastManager.getArrayOfDescription().get(3));
+            description25.setText(weatherForecastManager.getArrayOfDescription().get(4));
         }
     }
 
@@ -240,6 +289,11 @@ public class AppWindowController implements Initializable {
             temp13.setText("");
             temp14.setText("");
             temp15.setText("");
+            description11.setText("");
+            description12.setText("");
+            description13.setText("");
+            description14.setText("");
+            description15.setText("");
         }
         else if(comboBoxCities.getId().equals("comboBoxCities2")) {
             graphic21.setImage(null);
@@ -252,6 +306,11 @@ public class AppWindowController implements Initializable {
             temp23.setText("");
             temp24.setText("");
             temp25.setText("");
+            description21.setText("");
+            description22.setText("");
+            description23.setText("");
+            description24.setText("");
+            description25.setText("");
         }
     }
 
