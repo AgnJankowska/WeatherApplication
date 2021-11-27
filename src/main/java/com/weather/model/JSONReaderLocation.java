@@ -1,13 +1,12 @@
 package com.weather.model;
 
+import com.weather.App;
 import com.weather.model.auxiliaryClasses.StringFromList;
 import org.json.JSONArray;
 
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,7 +39,7 @@ public class JSONReaderLocation{
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            App.showErrorMessage("Nie znaleziono wymaganego pliku źródłowego.");
         }
 
         //dodatkowy element reprezentujący cały kraj
@@ -67,7 +66,7 @@ public class JSONReaderLocation{
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            App.showErrorMessage("Nie znaleziono wymaganego pliku źródłowego.");
         }
 
         return representationOfWholeCountry;
@@ -86,7 +85,7 @@ public class JSONReaderLocation{
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            App.showErrorMessage("Nie znaleziono wymaganego pliku źródłowego.");
         }
         return countryId;
     }

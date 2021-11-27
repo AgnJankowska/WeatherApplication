@@ -1,5 +1,7 @@
 package com.weather.model;
 
+import com.weather.App;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
@@ -22,7 +24,7 @@ public class DateHandler {
         try {
             calendar.setTime(formatter.parse(getCurrentDate()));
         } catch (ParseException e) {
-            e.printStackTrace();
+            App.showErrorMessage("Wystąpił problem z ustaleniem daty.");
         }
 
         calendar.add(Calendar.DATE, 0);
