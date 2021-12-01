@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class ViewFactory {
 
@@ -30,7 +31,7 @@ public class ViewFactory {
         }
 
         Scene scene = new Scene(parent);
-        scene.getStylesheets().add(getClass().getResource("css/style.css").toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("css/style.css")).toExternalForm());
         Stage stage = new Stage();
 
         stage.setResizable(false);

@@ -3,10 +3,12 @@ package com.weather.model.weatherCondition;
 public enum MainCondition {
 
     THUNDERSTORM,
-    DRIZZLE,
     RAIN,
+    SHOWER_RAIN,
     SNOW,
-    ATMOSPHERE,
+    MIST,
     CLEAR,
-    CLOUDS
+    FEW_CLOUDS,
+    SCATTERED_CLOUDS,
+    BROKEN_CLOUDS
 }

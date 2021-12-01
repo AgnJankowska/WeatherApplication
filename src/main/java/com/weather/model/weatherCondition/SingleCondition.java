@@ -2,31 +2,23 @@ package com.weather.model.weatherCondition;
 
 public class SingleCondition {
 
-    private int Id;
+    private int id;
     private MainCondition main;
     private String description;
 
+    public SingleCondition(int id, MainCondition main, String description) {
+        this.id = id;
+        this.main = main;
+        this.description = description;
+    }
+
     public int getId() {
-        return Id;
+        return id;
     }
-
-    public void setId(int id) {
-        Id = id;
-    }
-
     public MainCondition getMain() {
         return main;
     }
-
-    public void setMain(MainCondition main) {
-        this.main = main;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

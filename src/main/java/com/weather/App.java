@@ -1,6 +1,5 @@
 package com.weather;
 
-import com.weather.model.CreateURL;
 import com.weather.view.ViewFactory;
 import javafx.application.Application;
 import javafx.scene.control.Alert;

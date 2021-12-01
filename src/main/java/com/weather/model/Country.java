@@ -1,15 +1,15 @@
 package com.weather.model;
 
-public class City {
+public class Country {
 
     private final String name;
-    private final Integer country_id;
+    private final Integer id;
     private final Double latitude;
     private final Double longitude;
 
-    public City(String name, Integer country_id, Double latitude, Double longitude) {
+    public Country(String name, Integer id, Double latitude, Double longitude) {
         this.name = name;
-        this.country_id = country_id;
+        this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -18,8 +18,8 @@ public class City {
         return name;
     }
 
-    public Integer getCountryId() {
-        return country_id;
+    public Integer getId() {
+        return id;
     }
 
     public Double getLatitude() {
@@ -29,4 +29,5 @@ public class City {
     public Double getLongitude() {
         return longitude;
     }
+
 }

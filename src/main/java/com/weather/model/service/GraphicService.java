@@ -1,82 +1,56 @@
 package com.weather.model.service;
 
-import com.weather.model.WeatherConditionGraphic;
-import com.weather.model.WeatherForecastManager;
+import com.weather.model.WeatherForecastFor5Days;
+import com.weather.model.forecastComponent.RootWeather;
+import com.weather.model.weatherCondition.MainCondition;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.image.Image;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class GraphicService extends Service<List<Image>> {
 
-    private WeatherForecastManager weatherForecastManager;
-    private Image clearSky = new Image(getClass().getResourceAsStream("graphics/clear_sky.png"));
-    private Image brokenClouds = new Image(getClass().getResourceAsStream("graphics/broken_clouds.png"));
-    private Image fewClouds = new Image(getClass().getResourceAsStream("graphics/few_clouds.png"));
-    private Image mist = new Image(getClass().getResourceAsStream("graphics/mist.png"));
-    private Image rain = new Image(getClass().getResourceAsStream("graphics/rain.png"));
-    private Image scatteredClouds = new Image(getClass().getResourceAsStream("graphics/scattered_clouds.png"));
-    private Image showerRain = new Image(getClass().getResourceAsStream("graphics/shower_rain.png"));
-    private Image snow = new Image(getClass().getResourceAsStream("graphics/snow.png"));
-    private Image thunderstorm = new Image(getClass().getResourceAsStream("graphics/thunderstorm.png"));
-    private Image notSet = new Image(getClass().getResourceAsStream("graphics/not_set.png"));
-
-    public GraphicService(WeatherForecastManager weatherForecastManager) {
-        this.weatherForecastManager = weatherForecastManager;
+    public GraphicService(RootWeather weatherObject) {
+        this.weatherObject = weatherObject;
     }
+
+    private final RootWeather weatherObject;
+    private final Image clearSky = new Image(Objects.requireNonNull(getClass().getResourceAsStream("graphics/clear_sky.png")));
+    private final Image brokenClouds = new Image(Objects.requireNonNull(getClass().getResourceAsStream("graphics/broken_clouds.png")));
+    private final Image fewClouds = new Image(Objects.requireNonNull(getClass().getResourceAsStream("graphics/few_clouds.png")));
+    private final Image mist = new Image(Objects.requireNonNull(getClass().getResourceAsStream("graphics/mist.png")));
+    private final Image rain = new Image(Objects.requireNonNull(getClass().getResourceAsStream("graphics/rain.png")));
+    private final Image scatteredClouds = new Image(Objects.requireNonNull(getClass().getResourceAsStream("graphics/scattered_clouds.png")));
+    private final Image showerRain = new Image(Objects.requireNonNull(getClass().getResourceAsStream("graphics/shower_rain.png")));
+    private final Image snow = new Image(Objects.requireNonNull(getClass().getResourceAsStream("graphics/snow.png")));
+    private final Image thunderstorm = new Image(Objects.requireNonNull(getClass().getResourceAsStream("graphics/thunderstorm.png")));
 
     @Override
     protected Task<List<Image>> createTask() {
-        return new Task<List<Image>>() {
+        return new Task<>() {
             @Override
-            protected List<Image> call() throws Exception {
-                ArrayList<Integer> arrayOfConditions = weatherForecastManager.getArrayOfConditions();
-                return getConditionGraphic(arrayOfConditions);
+            protected List<Image> call() {
+                WeatherForecastFor5Days weatherForecastFor5Days = new WeatherForecastFor5Days();
+                List<MainCondition> arrayOfConditions = weatherForecastFor5Days.getArrayOfConditions(weatherObject);
+                return getListOfImage(arrayOfConditions);
             }
         };
     }
 
-    public List<Image> getConditionGraphic(ArrayList<Integer> arrayOfConditions) {
+    public List<Image> getListOfImage(List<MainCondition> arrayOfConditions) {
 
-        List<Image> images = null;
+        List<Image> images;
         Image image0 = null;
         Image image1 = null;
         Image image2 = null;
         Image image3 = null;
         Image image4 = null;
 
-        for(int i=0; i<5; i++) {
-            Image image = null;
-            if (arrayOfConditions.get(i) >= 200 && arrayOfConditions.get(i) <= 232) {
-                image = thunderstorm;
-            } else if (arrayOfConditions.get(i) >= 300 && arrayOfConditions.get(i) <= 311) {
-                image = rain;
-            } else if (arrayOfConditions.get(i) >= 312 && arrayOfConditions.get(i) <= 311) {
-                image = showerRain;
-            } else if (arrayOfConditions.get(i) >= 500 && arrayOfConditions.get(i) <= 504) {
-                image = rain;
-            } else if (arrayOfConditions.get(i) == 511) {
-                image = snow;
-            } else if (arrayOfConditions.get(i) >= 520 && arrayOfConditions.get(i) <= 531) {
-                image = showerRain;
-            } else if (arrayOfConditions.get(i) >= 600 && arrayOfConditions.get(i) <= 622) {
-                image = snow;
-            } else if (arrayOfConditions.get(i) >= 701 && arrayOfConditions.get(i) <= 781) {
-                image = mist;
-            } else if (arrayOfConditions.get(i) == 800) {
-                image = clearSky;
-            } else if (arrayOfConditions.get(i) == 801 || arrayOfConditions.get(i) == 802) {
-                image = fewClouds;
-            } else if (arrayOfConditions.get(i) == 803) {
-                image = scatteredClouds;
-            } else if (arrayOfConditions.get(i) == 804) {
-                image = brokenClouds;
-            } else {
-                image = null;
-            }
+        int numberOfDayInForecast = 5;
+        for(int i = 0; i< numberOfDayInForecast; i++) {
+            Image image = getSingleImage(arrayOfConditions, i);
 
             switch(i) {
                 case 0:
@@ -99,4 +73,40 @@ public class GraphicService extends Service<List<Image>> {
         images = Arrays.asList(image0, image1, image2, image3, image4);
         return images;
     }
+
+    private Image getSingleImage(List<MainCondition> arrayOfConditions, int i){
+        Image image = null;
+        switch (arrayOfConditions.get(i)) {
+            case THUNDERSTORM:
+                image = thunderstorm;
+                break;
+            case MIST:
+                image = mist;
+                break;
+            case FEW_CLOUDS:
+                image = fewClouds;
+                break;
+            case SHOWER_RAIN:
+                image = showerRain;
+                break;
+            case BROKEN_CLOUDS:
+                image = brokenClouds;
+                break;
+            case SCATTERED_CLOUDS:
+                image = scatteredClouds;
+                break;
+            case RAIN:
+                image = rain;
+                break;
+            case SNOW:
+                image = snow;
+                break;
+            case CLEAR:
+                image = clearSky;
+                break;
+        }
+        return image;
+    }
+
+
 }

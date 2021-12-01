@@ -1,3 +1,4 @@
 target/
 out/
 .idea/
+src/main/java/com/weather/model/privateKey/

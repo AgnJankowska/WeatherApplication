@@ -1,47 +1,23 @@
 package com.weather.model;
 
-import com.weather.App;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import java.util.List;
 
 public class DateHandler {
 
-    private static SimpleDateFormat formatter = new SimpleDateFormat("E");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E \ndd.MM");
 
-    public ArrayList<String> getArrayOfFiveDays() {
+    public List<String> createArrayOfFiveDays() {
 
-        ArrayList<String> arrayOfFiveDays = new ArrayList<String>() {};
+        List<String> arrayOfFiveDays = new ArrayList<>();
+        LocalDate localDate = LocalDate.now();
 
-        Calendar calendar = Calendar.getInstance();
-        try {
-            calendar.setTime(formatter.parse(getCurrentDate()));
-        } catch (ParseException e) {
-            App.showErrorMessage("Wystąpił problem z ustaleniem daty.");
-        }
-
-        calendar.add(Calendar.DATE, 0);
-        arrayOfFiveDays.add(formatter.format(calendar.getTime()));
-
-        int i=0;
-        while(i < 4){
-            calendar.add(Calendar.DATE, 1);
-            arrayOfFiveDays.add(formatter.format(calendar.getTime()));
-            i++;
+        int numberOfDaysInForecast = 5;
+        for(int i = 0; i< numberOfDaysInForecast; i++){
+            arrayOfFiveDays.add(localDate.plusDays(i).format(formatter));
         }
         return arrayOfFiveDays;
-    }
-
-    private static String getCurrentDate() {
-        Date date = new Date();
-        String currentDate = formatter.format(date);
-        return currentDate;
     }
 }
