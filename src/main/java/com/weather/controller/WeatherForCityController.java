@@ -2,6 +2,7 @@ package com.weather.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.List;
@@ -52,6 +53,9 @@ public class WeatherForCityController {
 
     @FXML
     protected Label temp15;
+
+    @FXML
+    protected ProgressIndicator loadingBar;
 
     public void setSingleDescription(List<String> arrayOfDescription) {
         description11.setText(arrayOfDescription.get(0));

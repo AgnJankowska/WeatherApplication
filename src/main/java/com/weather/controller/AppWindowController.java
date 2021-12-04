@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class AppWindowController implements Initializable {
     }
 
     @FXML
-    private ProgressBar progressBar;
+    private ProgressIndicator progressBar;
 
     @FXML
     private Label labelToProgressBar;
@@ -162,6 +163,10 @@ public class AppWindowController implements Initializable {
         City city = null;
         CitiesAndCountriesManager citiesAndCountries = new CitiesAndCountriesManager(countriesList, citiesList);
         if(!comboBoxCities.getValue().equals("")) {
+
+            showLoadingBar(comboBoxCities, true);
+            resetGraphicAndTemperature(comboBoxCities);
+
             try {
                 String selectedCityId = comboBoxCities.getId();
                 String selectedCityName = comboBoxCities.getValue();
@@ -182,10 +187,20 @@ public class AppWindowController implements Initializable {
                     setTemperature(weatherForecastManager.getWeatherObject(), comboBoxCities);
                     setConditions(weatherForecastManager.getWeatherObject(), comboBoxCities);
                     setDescription(weatherForecastManager.getWeatherObject(), comboBoxCities);
+                    showLoadingBar(comboBoxCities, false);
                 } catch (IOException ioException) {
                     App.showErrorMessage("Wystąpił problem z pobraniem danych pogodowych.");
                 }
             });
+        }
+    }
+
+    private void showLoadingBar(ComboBox<String> comboBoxCities, boolean showOrHide){
+        if(comboBoxCities.getId().equals("comboBoxCities1")) {
+            weatherForCity1Controller.loadingBar.setVisible(showOrHide);
+        }
+        else if(comboBoxCities.getId().equals("comboBoxCities2")) {
+            weatherForCity2Controller.loadingBar.setVisible(showOrHide);
         }
     }
 
