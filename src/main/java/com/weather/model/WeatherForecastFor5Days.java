@@ -17,13 +17,14 @@ public class WeatherForecastFor5Days {
         int maxTemperature;
         List<String> arrayOfTemperature = new ArrayList<>(numberOfDayInForecast);
 
-        int i=0;
-        while(i < numberOfDayInForecast){
-            maxTemperature = (int)Math.round(weatherObject.getDaily().get(i).getTemp().getMax());
-            arrayOfTemperature.add(maxTemperature+"");
+        int i = 0;
+        while (i < numberOfDayInForecast) {
+            maxTemperature = (int) Math.round(weatherObject.getDaily().get(i).getTemp().getMax());
+            arrayOfTemperature.add(String.valueOf(maxTemperature));
             i++;
         }
         return arrayOfTemperature;
+
     }
 
     public List<MainCondition> getArrayOfConditions(RootWeather weatherObject) {
@@ -64,7 +65,6 @@ public class WeatherForecastFor5Days {
 
     private List<SingleCondition> initializeArrayOfCondition() {
         DescriptionOfCondition descriptionOfCondition = new DescriptionOfCondition();
-        descriptionOfCondition.setArrayOfCondition();
         return descriptionOfCondition.getArrayOfCondition();
     }
 }

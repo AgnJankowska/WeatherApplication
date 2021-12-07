@@ -10,5 +10,6 @@ public enum MainCondition {
     CLEAR,
     FEW_CLOUDS,
     SCATTERED_CLOUDS,
-    BROKEN_CLOUDS
+    BROKEN_CLOUDS;
+
 }

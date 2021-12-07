@@ -4,8 +4,13 @@ import java.util.List;
 
 public class Daily {
 
-    private Temp temp;
-    private List<Weather> weather;
+    private final Temp temp;
+    private final List<Weather> weather;
+
+    public Daily(Temp temp, List<Weather> weather) {
+        this.temp = temp;
+        this.weather = weather;
+    }
 
     public Temp getTemp() {
         return temp;

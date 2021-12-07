@@ -4,18 +4,27 @@ import java.util.ArrayList;
 
 public class DescriptionOfCondition {
 
-    ArrayList<SingleCondition> arrayOfCondition;
+    private final ArrayList<SingleCondition> arrayOfCondition;
 
     public DescriptionOfCondition() {
         this.arrayOfCondition = new ArrayList<>();
+        initializeArrayOfCondition();
     }
 
-    private void setSingleCondition(int Id, MainCondition main, String description) {
-        SingleCondition condition = new SingleCondition(Id, main, description);
-        arrayOfCondition.add(condition);
+    public ArrayList<SingleCondition> getArrayOfCondition(){
+        return this.arrayOfCondition;
     }
 
-    public void setArrayOfCondition() {
+    public boolean idIsCorrect(int id) {
+        for(SingleCondition singleCondition1 : arrayOfCondition) {
+            if(singleCondition1.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void initializeArrayOfCondition() {
         setSingleCondition(200, MainCondition.THUNDERSTORM, "burza z łagodnymi opadami");
         setSingleCondition(201, MainCondition.THUNDERSTORM, "burza z opadami");
         setSingleCondition(202, MainCondition.THUNDERSTORM, "burza z ulewą");
@@ -82,7 +91,8 @@ public class DescriptionOfCondition {
         setSingleCondition(804, MainCondition.BROKEN_CLOUDS, "niebo zachmurzone");
     }
 
-    public ArrayList<SingleCondition> getArrayOfCondition(){
-        return this.arrayOfCondition;
+    private void setSingleCondition(int Id, MainCondition main, String description) {
+        SingleCondition condition = new SingleCondition(Id, main, description);
+        arrayOfCondition.add(condition);
     }
 }

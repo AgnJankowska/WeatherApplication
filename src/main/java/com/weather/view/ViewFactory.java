@@ -40,6 +40,4 @@ public class ViewFactory {
 
         stage.show();
     }
-
-
 }

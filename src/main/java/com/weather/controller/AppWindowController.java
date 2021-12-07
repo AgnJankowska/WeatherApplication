@@ -15,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 
@@ -182,15 +181,11 @@ public class AppWindowController implements Initializable {
 
             weatherService.start();
             weatherService.setOnSucceeded(e -> {
-                try {
-                    weatherForecastManager = new WeatherForecastManager(weatherService.getValue());
-                    setTemperature(weatherForecastManager.getWeatherObject(), comboBoxCities);
-                    setConditions(weatherForecastManager.getWeatherObject(), comboBoxCities);
-                    setDescription(weatherForecastManager.getWeatherObject(), comboBoxCities);
-                    showLoadingBar(comboBoxCities, false);
-                } catch (IOException ioException) {
-                    App.showErrorMessage("Wystąpił problem z pobraniem danych pogodowych.");
-                }
+                weatherForecastManager = new WeatherForecastManager(weatherService.getValue());
+                setTemperature(weatherForecastManager.getWeatherObject(), comboBoxCities);
+                setConditions(weatherForecastManager.getWeatherObject(), comboBoxCities);
+                setDescription(weatherForecastManager.getWeatherObject(), comboBoxCities);
+                showLoadingBar(comboBoxCities, false);
             });
         }
     }

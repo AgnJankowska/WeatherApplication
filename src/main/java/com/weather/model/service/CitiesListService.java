@@ -1,6 +1,7 @@
 package com.weather.model.service;
 
 import com.google.gson.Gson;
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import com.google.gson.reflect.TypeToken;
 import com.weather.App;
 import com.weather.model.City;
@@ -31,7 +32,7 @@ public class CitiesListService extends Service<List<City>> {
         };
     }
 
-    private List<City> createCityListFromJSON() {
+    protected List<City> createCityListFromJSON() {
         List<City> cities;
 
         try {

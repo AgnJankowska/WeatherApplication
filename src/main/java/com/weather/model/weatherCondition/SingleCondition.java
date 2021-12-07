@@ -2,9 +2,9 @@ package com.weather.model.weatherCondition;
 
 public class SingleCondition {
 
-    private int id;
-    private MainCondition main;
-    private String description;
+    private final int id;
+    private final MainCondition main;
+    private final String description;
 
     public SingleCondition(int id, MainCondition main, String description) {
         this.id = id;
@@ -15,10 +15,13 @@ public class SingleCondition {
     public int getId() {
         return id;
     }
+
     public MainCondition getMain() {
         return main;
     }
+
     public String getDescription() {
         return description;
     }
 }
+
