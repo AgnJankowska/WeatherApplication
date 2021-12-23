@@ -1,9 +1,9 @@
 package com.weather.model.weatherCondition;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.equalTo;
 
 class SingleConditionTest {
@@ -19,8 +19,9 @@ class SingleConditionTest {
         SingleCondition singleCondition = new SingleCondition(id, main, description);
 
         //then
-        assertThat(singleCondition, is(notNullValue()));
-        assertThat(singleCondition.getId(), equalTo(800));
-        assertThat(singleCondition.getMain(), equalTo(MainCondition.CLEAR));
+        Assertions.assertAll(() -> {
+            assertThat(singleCondition.getId(), equalTo(800));
+            assertThat(singleCondition.getMain(), equalTo(MainCondition.CLEAR));
+        });
     }
 }

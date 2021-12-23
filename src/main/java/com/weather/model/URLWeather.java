@@ -2,12 +2,12 @@ package com.weather.model;
 
 import com.weather.model.privateKey.WeatherKey;
 
-public class CreateURL {
+public class URLWeather {
 
     private final Double latitudeDouble;
     private final Double longitudeDouble;
 
-    public CreateURL(Double longitude, Double latitude){
+    public URLWeather(Double longitude, Double latitude){
         this.longitudeDouble = longitude;
         this.latitudeDouble = latitude;
     }
@@ -19,6 +19,7 @@ public class CreateURL {
         String units = "&units=metric";
         String apiKey = WeatherKey.getApiKey();
         String apiExclude = "&exclude=current,minutely,hourly";
+
         return apiForecast + latitude + longitude + units + apiKey + apiExclude;
     }
 

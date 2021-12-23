@@ -1,6 +1,7 @@
 package com.weather.model;
 
 import javafx.collections.ObservableList;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -51,9 +52,11 @@ class CitiesAndCountriesManagerTest {
         ObservableList<String> observableList = citiesAndCountriesManager.getObservableList1(selectedCountry);
 
         //then
-        assertThat(observableList, hasSize(3));
-        assertThat(observableList, not(contains(city1inCountry2, city2inCountry2)));
-        assertThat(observableList, contains("Cały kraj", "city1inCountry1", "city2inCountry1"));
+        Assertions.assertAll(() -> {
+            assertThat(observableList, hasSize(3));
+            assertThat(observableList, not(contains(city1inCountry2, city2inCountry2)));
+            assertThat(observableList, contains("Cały kraj", "city1inCountry1", "city2inCountry1"));
+        });
     }
 
     @Test
@@ -76,9 +79,11 @@ class CitiesAndCountriesManagerTest {
         ObservableList<String> observableList = citiesAndCountriesManager.getObservableList2(selectedCountry);
 
         //then
-        assertThat(observableList, hasSize(3));
-        assertThat(observableList, not(contains(city1inCountry2, city2inCountry2)));
-        assertThat(observableList, contains("Cały kraj", "city1inCountry2", "city2inCountry2"));
+        Assertions.assertAll(() -> {
+            assertThat(observableList, hasSize(3));
+            assertThat(observableList, not(contains(city1inCountry2, city2inCountry2)));
+            assertThat(observableList, contains("Cały kraj", "city1inCountry2", "city2inCountry2"));
+        });
     }
 
     @Test
@@ -97,8 +102,10 @@ class CitiesAndCountriesManagerTest {
         ObservableList<String> observableList = citiesAndCountriesManager.getObservableList1(selectedCountry);
 
         //then
-        assertThat(observableList, hasSize(1));
-        assertThat(observableList, contains("Cały kraj"));
+        Assertions.assertAll(() -> {
+            assertThat(observableList, hasSize(1));
+            assertThat(observableList, contains("Cały kraj"));
+        });
     }
 
     @Test
@@ -117,8 +124,10 @@ class CitiesAndCountriesManagerTest {
         ObservableList<String> observableList = citiesAndCountriesManager.getObservableList2(selectedCountry);
 
         //then
-        assertThat(observableList, hasSize(1));
-        assertThat(observableList, contains("Cały kraj"));
+        Assertions.assertAll(() -> {
+            assertThat(observableList, hasSize(1));
+            assertThat(observableList, contains("Cały kraj"));
+        });
     }
 
     @Test
@@ -142,10 +151,12 @@ class CitiesAndCountriesManagerTest {
         City city2 = citiesAndCountriesManager.getCoordinate(selectedCityId2, selectedCityName, selectedCountryName);
 
         //then
-        assertThat(city1.getLatitude(), equalTo(13.0));
-        assertThat(city1.getLongitude(), equalTo(19.0));
-        assertThat(city2.getLatitude(), equalTo(13.0));
-        assertThat(city2.getLongitude(), equalTo(19.0));
+        Assertions.assertAll(() -> {
+            assertThat(city1.getLatitude(), equalTo(13.0));
+            assertThat(city1.getLongitude(), equalTo(19.0));
+            assertThat(city2.getLatitude(), equalTo(13.0));
+            assertThat(city2.getLongitude(), equalTo(19.0));
+        });
     }
 
     @Test
@@ -169,9 +180,11 @@ class CitiesAndCountriesManagerTest {
         City city2 = citiesAndCountriesManager.getCoordinate(selectedCityId2, selectedCityName, selectedCountryName);
 
         //then
-        assertThat(city1.getLatitude(), equalTo(11.0));
-        assertThat(city1.getLongitude(), equalTo(17.0));
-        assertThat(city2.getLatitude(), equalTo(11.0));
-        assertThat(city2.getLongitude(), equalTo(17.0));
+        Assertions.assertAll(() -> {
+            assertThat(city1.getLatitude(), equalTo(11.0));
+            assertThat(city1.getLongitude(), equalTo(17.0));
+            assertThat(city2.getLatitude(), equalTo(11.0));
+            assertThat(city2.getLongitude(), equalTo(17.0));
+        });
     }
 }

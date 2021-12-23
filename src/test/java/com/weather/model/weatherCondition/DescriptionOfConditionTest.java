@@ -1,5 +1,6 @@
 package com.weather.model.weatherCondition;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -13,8 +14,10 @@ class DescriptionOfConditionTest {
         DescriptionOfCondition descriptionOfCondition = new DescriptionOfCondition();
 
         //when & then
-        assertThat(descriptionOfCondition.getArrayOfCondition(), is(notNullValue()));
-        assertThat(descriptionOfCondition.getArrayOfCondition(), hasSize(54));
+        Assertions.assertAll(() -> {
+            assertThat(descriptionOfCondition.getArrayOfCondition(), is(notNullValue()));
+            assertThat(descriptionOfCondition.getArrayOfCondition(), hasSize(54));
+        });
     }
 
     @Test
@@ -24,13 +27,15 @@ class DescriptionOfConditionTest {
         DescriptionOfCondition descriptionOfCondition2 = new DescriptionOfCondition();
 
         //when & then
-        assertThat(descriptionOfCondition1.getArrayOfCondition(), hasSize(54));
-        assertThat(descriptionOfCondition2.getArrayOfCondition(), hasSize(54));
-        assertThat(descriptionOfCondition2.getArrayOfCondition(), not(sameInstance(descriptionOfCondition1.getArrayOfCondition())));
+        Assertions.assertAll(() -> {
+            assertThat(descriptionOfCondition1.getArrayOfCondition(), hasSize(54));
+            assertThat(descriptionOfCondition2.getArrayOfCondition(), hasSize(54));
+            assertThat(descriptionOfCondition2.getArrayOfCondition(), not(sameInstance(descriptionOfCondition1.getArrayOfCondition())));
+        });
     }
 
     @Test
-    void CorrectIdShouldReturnTrue() {
+    void correctIdShouldReturnTrue() {
         //given
         DescriptionOfCondition descriptionOfCondition = new DescriptionOfCondition();
 
@@ -43,7 +48,7 @@ class DescriptionOfConditionTest {
     }
 
     @Test
-    void IncorrectIdShouldReturnFalse() {
+    void incorrectIdShouldReturnFalse() {
         //given
         DescriptionOfCondition descriptionOfCondition = new DescriptionOfCondition();
 

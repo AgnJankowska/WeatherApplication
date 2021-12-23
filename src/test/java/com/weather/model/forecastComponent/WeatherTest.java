@@ -10,8 +10,10 @@ class WeatherTest {
 
     @Test
     void correctIdShouldReturnThisId() {
-        //when
+        //given
         int id = 800;
+
+        //when
         Weather weather = new Weather(id);
 
         //then
@@ -20,8 +22,10 @@ class WeatherTest {
 
     @Test
     void incorrectIdShouldThrowException() {
-        //when
+        //given
         int id = 1;
+
+        //when
         Weather weather = new Weather(id);
 
         //then

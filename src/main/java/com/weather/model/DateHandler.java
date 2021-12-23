@@ -8,15 +8,19 @@ import java.util.List;
 public class DateHandler {
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E \ndd.MM");
+    private final LocalDate currentDate;
+
+    public DateHandler(LocalDate currentDate) {
+        this.currentDate = currentDate;
+    }
 
     public List<String> createArrayOfFiveDays() {
 
         List<String> arrayOfFiveDays = new ArrayList<>();
-        LocalDate localDate = LocalDate.now();
 
         int numberOfDaysInForecast = 5;
         for(int i = 0; i< numberOfDaysInForecast; i++){
-            arrayOfFiveDays.add(localDate.plusDays(i).format(formatter));
+            arrayOfFiveDays.add(currentDate.plusDays(i).format(formatter));
         }
         return arrayOfFiveDays;
     }

@@ -17,7 +17,7 @@ class CreateURLTest {
         String givenURL = "https://api.openweathermap.org/data/2.5/onecall?&lat=60.55&lon=50.55&units=metric"+weatherKey+"&exclude=current,minutely,hourly";
 
         //when
-        CreateURL createURL = new CreateURL(longitude, latitude);
+        URLWeather createURL = new URLWeather(longitude, latitude);
 
         //then
         assertThat(createURL.getUrl(), equalTo(givenURL));
@@ -33,10 +33,9 @@ class CreateURLTest {
         String givenURL = "https://api.openweathermap.org/data/2.5/onecall?&lat=0.0&lon=0.0&units=metric"+weatherKey+"&exclude=current,minutely,hourly";
 
         //when
-        CreateURL createURL = new CreateURL(longitude, latitude);
+        URLWeather createURL = new URLWeather(longitude, latitude);
 
         //then
         assertThat(createURL.getUrl(), equalTo(givenURL));
     }
-
 }

@@ -39,7 +39,7 @@ public class GraphicService extends Service<List<Image>> {
         };
     }
 
-    private List<Image> getListOfImage(List<MainCondition> arrayOfConditions) {
+    public List<Image> getListOfImage(List<MainCondition> arrayOfConditions) {
 
         List<Image> images;
         Image image0 = null;

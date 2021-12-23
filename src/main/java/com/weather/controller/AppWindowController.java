@@ -4,10 +4,7 @@ import com.weather.App;
 import com.weather.model.*;
 import com.weather.model.auxiliaryClasses.AutoCompleteComboBoxListener;
 import com.weather.model.forecastComponent.RootWeather;
-import com.weather.model.service.CitiesListService;
-import com.weather.model.service.CountriesListService;
-import com.weather.model.service.GraphicService;
-import com.weather.model.service.WeatherService;
+import com.weather.model.service.*;
 import com.weather.view.ViewFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +16,7 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -83,17 +81,15 @@ public class AppWindowController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         CountriesListService countriesListService = new CountriesListService();
-        CitiesListService citiesListService = new CitiesListService();
-
-        citiesListService.start();
         countriesListService.start();
-
         countriesListService.setOnSucceeded(e -> {
             initializeListOfCountries(countriesListService.getValue());
             addCountries(comboBoxCountries1);
             addCountries(comboBoxCountries2);
         });
 
+        CitiesListService citiesListService = new CitiesListService();
+        citiesListService.start();
         citiesListService.setOnSucceeded(e -> initializeListOfCities(citiesListService.getValue()));
 
         setDate();
@@ -101,8 +97,20 @@ public class AppWindowController implements Initializable {
         comboBoxCountries1.setOnAction(e -> addCities(comboBoxCities1, comboBoxCountries1));
         comboBoxCountries2.setOnAction(e -> addCities(comboBoxCities2, comboBoxCountries2));
 
-        comboBoxCities1.setOnAction(e -> showWeather(comboBoxCities1, comboBoxCountries1));
-        comboBoxCities2.setOnAction(e -> showWeather(comboBoxCities2, comboBoxCountries2));
+        comboBoxCities1.setOnAction(e -> {
+            try {
+                showWeather(comboBoxCities1, comboBoxCountries1);
+            } catch (MalformedURLException malformedURLException) {
+                App.showErrorMessage("Wystąpił problem z pobraniem danych pogodowych.");
+            }
+        });
+        comboBoxCities2.setOnAction(e -> {
+            try {
+                showWeather(comboBoxCities2, comboBoxCountries2);
+            } catch (MalformedURLException malformedURLException) {
+                App.showErrorMessage("Wystąpił problem z pobraniem danych pogodowych.");
+            }
+        });
     }
 
     private void initializeListOfCountries(List<Country> value) {
@@ -130,7 +138,8 @@ public class AppWindowController implements Initializable {
     }
 
     private void setDate() {
-        DateHandler dateHandler = new DateHandler();
+        CurrentDate currentDate = new CurrentDate();
+        DateHandler dateHandler = new DateHandler(currentDate.getCurrentDate());
         List<String> arrayOfFiveDays = dateHandler.createArrayOfFiveDays();
         date1.setText(arrayOfFiveDays.get(0));
         date2.setText(arrayOfFiveDays.get(1));
@@ -158,11 +167,11 @@ public class AppWindowController implements Initializable {
         new AutoCompleteComboBoxListener<String>(comboBoxCities);
     }
 
-    private void showWeather(ComboBox<String> comboBoxCities, ComboBox<String> comboBoxCountries) {
+    private void showWeather(ComboBox<String> comboBoxCities, ComboBox<String> comboBoxCountries) throws MalformedURLException {
         City city = null;
+
         CitiesAndCountriesManager citiesAndCountries = new CitiesAndCountriesManager(countriesList, citiesList);
         if(!comboBoxCities.getValue().equals("")) {
-
             showLoadingBar(comboBoxCities, true);
             resetGraphicAndTemperature(comboBoxCities);
 
@@ -228,7 +237,6 @@ public class AppWindowController implements Initializable {
         graphicService.setOnSucceeded(e -> {
 
             List<Image> graphicList = graphicService.getValue();
-
             if(comboBoxCities.getId().equals("comboBoxCities1")) {
                 weatherForCity1Controller.setSingleCondition(graphicList);
             }

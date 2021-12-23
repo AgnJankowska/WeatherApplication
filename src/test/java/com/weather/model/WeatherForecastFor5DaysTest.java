@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.*;
 
 class WeatherForecastFor5DaysTest {
 
-    private static RootWeather weatherObject;
+    private static WeatherForecastManager weatherForecastManager;
 
     @BeforeAll
     static void setWeatherCondition() {
@@ -40,7 +40,7 @@ class WeatherForecastFor5DaysTest {
         dailyList.add(daily2);
         dailyList.add(daily2);
 
-        weatherObject = new RootWeather(dailyList);
+        weatherForecastManager = new WeatherForecastManager(new RootWeather(dailyList));
     }
 
     @Test
@@ -49,10 +49,9 @@ class WeatherForecastFor5DaysTest {
         WeatherForecastFor5Days weatherForecastFor5Days = new WeatherForecastFor5Days();
 
         //when
-        List<String> arrayOfTemperature = weatherForecastFor5Days.getArrayOfTemperature(weatherObject);
+        List<String> arrayOfTemperature = weatherForecastFor5Days.getArrayOfTemperature(weatherForecastManager.getWeatherObject());
 
         //then
-        assertThat(arrayOfTemperature, hasSize(5));
         assertThat(arrayOfTemperature, contains("32", "32", "32", "28", "28"));
     }
 
@@ -62,10 +61,9 @@ class WeatherForecastFor5DaysTest {
         WeatherForecastFor5Days weatherForecastFor5Days = new WeatherForecastFor5Days();
 
         //when
-        List<MainCondition> arrayOfConditions = weatherForecastFor5Days.getArrayOfConditions(weatherObject);
+        List<MainCondition> arrayOfConditions = weatherForecastFor5Days.getArrayOfConditions(weatherForecastManager.getWeatherObject());
 
         //then
-        assertThat(arrayOfConditions, hasSize(5));
         assertThat(arrayOfConditions, contains(MainCondition.CLEAR, MainCondition.CLEAR, MainCondition.CLEAR, MainCondition.RAIN, MainCondition.RAIN));
     }
 
@@ -75,10 +73,9 @@ class WeatherForecastFor5DaysTest {
         WeatherForecastFor5Days weatherForecastFor5Days = new WeatherForecastFor5Days();
 
         //when
-        List<String> arrayOfDescription = weatherForecastFor5Days.getArrayOfDescription(weatherObject);
+        List<String> arrayOfDescription = weatherForecastFor5Days.getArrayOfDescription(weatherForecastManager.getWeatherObject());
 
         //then
-        assertThat(arrayOfDescription, hasSize(5));
         assertThat(arrayOfDescription, contains("czyste niebo", "czyste niebo", "czyste niebo", "lekkie opady deszczu", "lekkie opady deszczu"));
     }
 }

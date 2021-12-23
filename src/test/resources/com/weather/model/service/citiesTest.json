@@ -1,0 +1,35 @@
+[
+  {
+    "id": 78,
+    "name": "Jurm",
+    "state_id": 3901,
+    "state_code": "BDS",
+    "country_id": 1,
+    "country_code": "AF",
+    "latitude": "36.86477000",
+    "longitude": "70.83421000",
+    "wikiDataId": "Q10308323"
+  },
+  {
+    "id": 88417,
+    "name": "Tuchola",
+    "state_id": 1625,
+    "state_code": "KP",
+    "country_id": 176,
+    "country_code": "PL",
+    "latitude": "53.58792000",
+    "longitude": "17.85905000",
+    "wikiDataId": "Q325910"
+  },
+  {
+    "id": 109907,
+    "name": "Lazurne",
+    "state_id": 4684,
+    "state_code": "65",
+    "country_id": 230,
+    "country_code": "UA",
+    "latitude": "46.08400000",
+    "longitude": "32.52955000",
+    "wikiDataId": "Q3656032"
+  }
+]

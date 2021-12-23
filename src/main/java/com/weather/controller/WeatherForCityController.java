@@ -10,12 +10,6 @@ import java.util.List;
 public class WeatherForCityController {
 
     @FXML
-    protected Label temp11;
-
-    @FXML
-    protected Label description11;
-
-    @FXML
     protected ImageView graphic11;
 
     @FXML
@@ -31,7 +25,22 @@ public class WeatherForCityController {
     protected ImageView graphic15;
 
     @FXML
+    protected Label temp11;
+
+    @FXML
     protected Label temp12;
+
+    @FXML
+    protected Label temp13;
+
+    @FXML
+    protected Label temp14;
+
+    @FXML
+    protected Label temp15;
+
+    @FXML
+    protected Label description11;
 
     @FXML
     protected Label description12;
@@ -40,19 +49,10 @@ public class WeatherForCityController {
     protected Label description13;
 
     @FXML
-    protected Label temp13;
-
-    @FXML
     protected Label description14;
 
     @FXML
-    protected Label temp14;
-
-    @FXML
     protected Label description15;
-
-    @FXML
-    protected Label temp15;
 
     @FXML
     protected ProgressIndicator loadingBar;
